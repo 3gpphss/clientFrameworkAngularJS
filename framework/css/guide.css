@@ -1,0 +1,651 @@
+body > .content
+{
+    margin-left: 280px;
+	height: 100%;
+}
+
+body > .content iframe
+{
+    border: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body > .table-of-contents
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100%;
+    background-color: #fff;
+    overflow: auto;
+	border-right: 1px solid #efefef;
+}
+
+body > .table-of-contents h1.title
+{
+	font-size: 20px;
+	margin: 0.5em 0;
+	padding: 0 20px;
+}
+
+body > .table-of-contents h1.title a
+{
+	border: none;
+	color: #1b1b1b;
+	padding: 0;
+	margin: 0;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+}
+
+body > .table-of-contents h1.title a:hover
+{
+	border-bottom: 1px solid #F47500;
+}
+
+body > .table-of-contents .tree li a
+{
+	padding: 0 20px;
+}
+
+.guide-chart
+{
+    display: inline-block;
+    margin: 1em 0;
+}
+
+.guide-chart thead,
+.guide-chart tbody th
+{
+    background-color: transparent;
+}
+
+.guide-chart tbody th
+{
+    text-align: right;
+}
+
+.guide-chart th,
+.guide-chart td
+{
+    padding: 15px;
+    text-align: center;
+}
+
+.guide-chart.text-left th,
+.guide-chart.text-left td
+{
+    text-align: left;
+}
+
+.guide-chart th ul,
+.guide-chart td ul
+{
+    text-align: left;
+}
+
+.guide-chart th
+{
+    font-weight: normal;
+    color: #333;
+    font-size: 16px;
+}
+
+.guide-chart tbody td
+{
+    background-color: #E7E7E7;
+}
+
+.guide-chart.primary tbody.orange-bar td
+{
+    background: transparent url(../images/orange-bar.png) repeat-x left top;
+    padding: 0;
+    margin: 0;
+}
+
+.secondary
+{
+    color: #fff;
+}
+
+td.secondary,
+.guide-chart.secondary tbody td
+{
+    background: transparent url(../images/dark-background.png) repeat left top;
+}
+
+code
+{
+	font-family: monospace;
+	color: black;
+	line-height: 16px;
+}
+
+.example,
+.example .example-live
+{
+	margin: 15px 0;
+}
+
+.example .example-content
+{
+	background-color: #fff;
+	padding: 15px 15px 15px 0;
+	border-radius: 15px;
+	margin: 15px 0;
+}
+
+.example .example-content .syntaxhighlighter
+{
+	margin: 0 !important;
+}
+
+.guide-dark
+{
+	background-color: #404040;
+	padding: 20px;
+}
+
+.guide-blue
+{
+	background-color: #124191;
+	padding: 20px;
+}
+
+.colors
+{
+	background-color: #fff;
+	padding: 24px;
+}
+
+.colors label
+{
+	display: block;
+	line-height: 18px;
+	margin-bottom: 8px;
+}
+
+.colors .small label
+{
+	font-size: 12px;
+	margin-bottom: 0;
+}
+
+.colors .color-box
+{
+	width: 180px;
+	height: 180px;
+	margin-bottom: 16px;
+}
+
+.colors .nokia-blue
+{
+	background-color: #124191;
+}
+
+.colors .nokia-light-blue
+{
+	background-color: #00C9FF;
+}
+
+.colors .nokia-dark-gray
+{
+	background-color: #68717A;
+}
+
+.colors .nokia-medium-gray
+{
+	background-color: #A8BBC0;
+}
+
+.colors .nokia-light-gray
+{
+	background-color: #D8D9DA;
+}
+
+.colors .light-blue-gradient
+{
+	background: -webkit-linear-gradient(#00C9FF, #00A1CC);
+	background: -moz-linear-gradient(#00C9FF, #00A1CC);
+	background: linear-gradient(#00C9FF, #00A1CC);
+}
+
+.colors .dark-gray-gradient
+{
+	background: -webkit-linear-gradient(#68717A, #535A62);
+	background: -moz-linear-gradient(#68717A, #535A62);
+	background: linear-gradient(#68717A, #535A62);
+}
+
+.colors .medium-gray-gradient
+{
+	background: -webkit-linear-gradient(#A8BBC0, #86969A);
+	background: -moz-linear-gradient(#A8BBC0, #86969A);
+	background: linear-gradient(#A8BBC0, #86969A);
+}
+
+.colors .light-gray-gradient
+{
+	background: -webkit-linear-gradient(#D8D9DA, #ADAEAE);
+	background: -moz-linear-gradient(#D8D9DA, #ADAEAE);
+	background: linear-gradient(#D8D9DA, #ADAEAE);
+}
+
+.colors .global-gray
+{
+	background-color: #474747;
+}
+.colors .nav-gray
+{
+	background-color: #333;
+}
+.colors .dark-gray
+{
+	background-color: #1b1b1b;
+}
+.colors .medium-gray
+{
+	background-color: #666;
+}
+.colors .light-gray
+{
+	background-color: #aaa;
+}
+.colors .white
+{
+	width: 178px;
+	height: 178px;
+	border: 1px solid #666;
+	background-color: #fff;
+}
+.colors .black
+{
+	background-color: #000;
+}
+
+.colors .background-gradient
+{
+	background: -webkit-linear-gradient(#D8DAE0, #EFEFEF);
+	background: -moz-linear-gradient(#D8DAE0, #EFEFEF);
+	background: linear-gradient(#D8DAE0, #EFEFEF);
+}
+
+.colors .background-insight-gradient
+{
+	background: -webkit-linear-gradient(#CFD0D9, #B8B8BE);
+	background: -moz-linear-gradient(#CFD0D9, #B8B8BE);
+	background: linear-gradient(#CFD0D9, #B8B8BE);
+	
+}
+
+.colors .ui-selection-blue
+{
+	background-color: #0B6DAF;
+}
+
+.colors .ui-hover-blue
+{
+	background-color: #00A1CC;
+}
+
+.colors .ui-light-blue
+{
+	background-color: #CCF4FF;
+}
+
+.colors .alert-red
+{
+	background-color: #BE0006;
+}
+
+.colors .warning-yellow
+{
+	background-color: #FFCC00;
+}
+
+.colors .ok-green
+{
+	background-color: #3DAA00;
+}
+
+.colors.visualization table
+{
+	table-layout: fixed;
+}
+
+.colors.visualization table td
+{
+	width: 75px;
+	height: 60px;
+	line-height: 1px;
+	padding-bottom: 13px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.colors.visualization.palette table td
+{
+	width: 84px;
+	padding-bottom: 18px;
+}
+
+.colors.visualization table tr:last-child td
+{
+	padding-bottom: 0;
+}
+
+.colors.visualization table td .color,
+.colors.visualization table td .bar-color
+{
+	width: 60px;
+	height: 60px;
+	display: inline-block;
+	margin: 0;
+}
+
+.colors.visualization table td .bar-color
+{
+	position: relative;
+}
+
+.colors.visualization table td .bar-color .left,
+.colors.visualization table td .bar-color .right
+{
+	width: 30px;
+	height: 100%;
+	position: absolute;
+}
+
+.colors.visualization table td .bar-color .left
+{
+	top: 0;
+	left: 0;
+	-webkit-border-top-left-radius: 6px;
+	-moz-border-radius-topleft: 6px;
+	border-top-left-radius: 6px;
+}
+
+.colors.visualization table td .bar-color .right
+{
+	top: 0;
+	right: 0;
+	-webkit-border-top-right-radius: 6px;
+	-moz-border-radius-topright: 6px;
+	border-top-right-radius: 6px;
+}
+
+.colors.visualization table td .bar-color.one .left
+{
+	background-color: #00C9FF;
+}
+
+.colors.visualization table td .bar-color.one .right
+{
+	background-color: #00A1CC;
+}
+
+.colors.visualization table td .bar-color.two .left
+{
+	background-color: #474747;
+}
+
+.colors.visualization table td .bar-color.two .right
+{
+	background-color: #333333;
+}
+
+.colors.visualization table td .bar-color.three .left
+{
+	background-color: #A8BBC0;
+}
+
+.colors.visualization table td .bar-color.three .right
+{
+	background-color: #86969A;
+}
+
+.colors.visualization table td .bar-color.four .left
+{
+	background-color: #D8D9DA;
+}
+
+.colors.visualization table td .bar-color.four .right
+{
+	background-color: #ADAEAE;
+}
+
+.colors.visualization table td .bar-color.five .left
+{
+	background-color: #0B6DAF;
+}
+
+.colors.visualization table td .bar-color.five .right
+{
+	background-color: #09578C;
+}
+
+.colors.visualization table td .bar-color.six .left
+{
+	background-color: #68717A;
+}
+
+.colors.visualization table td .bar-color.six .right
+{
+	background-color: #535A62;
+}
+
+.colors.visualization table td .bar-color.seven .left
+{
+	background-color: #CCF4FF;
+}
+
+.colors.visualization table td .bar-color.seven .right
+{
+	background-color: #B2E3F0;
+}
+
+.colors.visualization table td .bar-color.eight .left
+{
+	background-color: #FF9900;
+}
+
+.colors.visualization table td .bar-color.eight .right
+{
+	background-color: #FF7505;
+}
+
+.colors.visualization table td .color.one
+{
+	background-color: #00C9FF;
+}
+
+.colors.visualization table td .color.two
+{
+	background-color: #68717A;
+}
+
+.colors.visualization table td .color.three
+{
+	background-color: #A8BBC0;
+}
+
+.colors.visualization table td .color.four
+{
+	background-color: #D8D9DA;
+}
+
+.colors.visualization table td .color.five
+{
+	background-color: #0B6DAF;
+}
+
+.colors.visualization table td .color.six
+{
+	background-color: #FFCC00;
+}
+
+.colors.visualization table td .color.seven
+{
+	background-color: #FF9900;
+}
+
+.colors.visualization table td .color.eight
+{
+	background-color: #124191;
+}
+
+.colors.visualization table td .color.nine
+{
+	background-color: #B2E3F0;
+}
+
+.colors.visualization table td .color.ten
+{
+	background-color: #B3B8BC;
+}
+
+.colors.visualization table td .color.eleven
+{
+	background-color: #CBD6D9;
+}
+
+.colors.visualization table td .color.twelve
+{
+	background-color: #6DA7CF;
+}
+
+.colors.visualization table td .color.thirteen
+{
+	background-color: #FFE066;
+}
+
+.colors.visualization table td .color.fourteen
+{
+	background-color: #FFDAA3;
+}
+
+.colors.visualization table td .color.fifteen
+{
+	background-color: #718DBD;
+}
+
+.colors.visualization table td .color.sixteen
+{
+	background-color: #00A1CC;
+}
+
+.colors.visualization table td .color.seventeen
+{
+	background-color: #474747;
+}
+
+.colors.visualization table td .color.eighteen
+{
+	background-color: #FFB70C;
+}
+
+.colors.visualization table td .color.nineteen
+{
+	background-color: #FF7F05;
+}
+
+.colors.visualization table td .color.twenty
+{
+	background-color: #0D316D;
+}
+
+.colors.visualization table td .color.gradient-one
+{
+	background: -webkit-linear-gradient(left, #00C9FF, #00A1CC);
+	background: -moz-linear-gradient(left, #00C9FF, #00A1CC);
+	background: linear-gradient(to right, #00C9FF, #00A1CC);
+}
+
+.colors.visualization table td .color.gradient-two
+{
+	background: -webkit-linear-gradient(left, #474747, #333333);
+	background: -moz-linear-gradient(left, #474747, #333333);
+	background: linear-gradient(to right, #474747, #333333);
+}
+
+.colors.visualization table td .color.gradient-three
+{
+	background: -webkit-linear-gradient(left, #A8BBC0, #86969A);
+	background: -moz-linear-gradient(left, #A8BBC0, #86969A);
+	background: linear-gradient(to right, #A8BBC0, #86969A);
+}
+
+.colors.visualization table td .color.gradient-four
+{
+	background: -webkit-linear-gradient(left, #D8D9DA, #ADAEAE);
+	background: -moz-linear-gradient(left, #D8D9DA, #ADAEAE);
+	background: linear-gradient(to right, #D8D9DA, #ADAEAE);
+}
+
+.colors.visualization table td .color.gradient-five
+{
+	background: -webkit-linear-gradient(left, #0B6DAF, #09578C);
+	background: -moz-linear-gradient(left, #0B6DAF, #09578C);
+	background: linear-gradient(to right, #0B6DAF, #09578C);
+}
+
+.colors.visualization table td .color.gradient-six
+{
+	background: -webkit-linear-gradient(left, #68717A, #535A62);
+	background: -moz-linear-gradient(left, #68717A, #535A62);
+	background: linear-gradient(to right, #68717A, #535A62);
+}
+
+.colors.visualization table td .color.gradient-seven
+{
+	background: -webkit-linear-gradient(left, #CCF4FF, #B2E3F0);
+	background: -moz-linear-gradient(left, #CCF4FF, #B2E3F0);
+	background: linear-gradient(to right, #CCF4FF, #B2E3F0);
+}
+
+.colors.visualization table td .color.gradient-eight
+{
+	background: -webkit-linear-gradient(left, #FF9900, #FF7F05);
+	background: -moz-linear-gradient(left, #FF9900, #FF7F05);
+	background: linear-gradient(to right, #FF9900, #FF7F05);
+}
+
+.colors.visualization table td .color.gradient-nine
+{
+	background: -webkit-linear-gradient(left, #FFCC00, #FFB70C);
+	background: -moz-linear-gradient(left, #FFCC00, #FFB70C);
+	background: linear-gradient(to right, #FFCC00, #FFB70C);
+}
+
+.colors.visualization table td .color.gradient-ten
+{
+	background: -webkit-linear-gradient(left, #124191, #0D2D65);
+	background: -moz-linear-gradient(left, #124191, #0D2D65);
+	background: linear-gradient(to right, #124191, #0D2D65);
+}
+
+.colors.visualization table td .color.gradient-eleven
+{
+	background: -webkit-linear-gradient(left, #00A1CC, #0084A9);
+	background: -moz-linear-gradient(left, #00A1CC, #0084A9);
+	background: linear-gradient(to right, #00A1CC, #0084A9);
+}
+
+.colors.visualization table td .color.gradient-twelve
+{
+	background: -webkit-linear-gradient(left, #B3B8BC, #868A8D);
+	background: -moz-linear-gradient(left, #B3B8BC, #868A8D);
+	background: linear-gradient(to right, #B3B8BC, #868A8D);
+}
+
+.important
+{
+	background-color: #FC0;
+	padding: 10px;
+	margin: 0 -10px;
+	color: #333;
+}

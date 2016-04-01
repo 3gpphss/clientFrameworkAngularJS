@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
+<meta charset="utf-8">
+    <title>One-NDS Provisioning</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" type="text/css" href="resources/BT/2.3.2/css/bootstrapTouch.css" />
+<title>Login</title>
+
+<script>
+javascript:window.history.forward(1);
+</script>
+<!--  //Sprint 51 PARKING : Login Submit button disable [Auto complete of input fields needs to be taken care]
+<script type="text/javascript"
+		src="resources/framework/js/lib/jquery-1.9.0.min.js"></script>
+<script type="text/javascript"
+		src="resources/framework/js/util/LoginHelper.js"></script> -->
+</head>
+<body style="margin: 100px auto 0;">
+
+<div class="radial-gradient"></div>
+
+<div class="row-fluid">
+<div class="login-screen span8 offset8">
+    <div class="row-fluid">
+        <div class="nsn-logo pull-right"></div>
+    </div>
+    <div class="box box-dashboard box-shadow">
+    <form name = "login" action="login.htm" method="post" style="margin: 0px;">
+        <div class="box-content">
+            <div class="login-header">
+                <h1>One-NDS<span class="emph"> Provisioning</span></h1>
+                <h4 class="muted">Version 16</h4>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span12 required-input">
+					
+                    <input id="userName" class="input-block-level" type="text" name = "userName" placeholder="Username" required />
+                    <span class="required-icon"></span>
+                </div>
+                <div class="span12 required-input pull-right">
+					
+                    <input id="password" class="input-block-level" type="password" name = "password" class="pull-right" placeholder="Password" required />
+                    <span class="required-icon"></span>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span24">
+                     <!--  //Sprint 51 PARKING : Login Submit button disable [Auto complete of input fields needs to be taken care]
+                    <input id="submit" type="submit" value="Log In" class="btn btn-inverse pull-right" disabled="true"/>  -->
+                    <input id="submit" type="submit" value="Log In" class="btn btn-inverse pull-right"/>
+                </div>
+            </div>
+
+            <hr />
+            <p class="legal">
+                You are about to access a private system. This system is for the use of authorized users only. All connections are logged. Any unauthorized access or attempts may be punished to the fullest extent possible under the applicable local legislation.
+            </p>
+        </div>
+		<div class="bottom"><div></div></div>
+		<div class="shadow"><div></div></div>
+        </form>
+    </div>
+</div>
+</div>
+
+<div class="footer fixed">
+&copy; 2014 Nokia Solutions and Networks. All rights reserved.
+</div>
+	<script type="text/javascript" src="resources/BT/2.3.2/js/libs/bootstrapTouch.js"></script>
+</body>
+</html>

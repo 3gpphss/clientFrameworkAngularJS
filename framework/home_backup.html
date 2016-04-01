@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
+<meta charset="utf-8">
+<title>One-NDS Provisioning</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="stylesheet" type="text/css"
+	href="resources/BT/2.3.2/css/bootstrapTouch.css" />
+<link rel="stylesheet" type="text/css"
+	href="resources/framework/css/style.css" />
+<script>
+javascript:window.history.forward(1);
+</script>
+
+</head>
+<body class="parallax">
+	<!-- this div is used for login processing image -->
+	<div id="loginload" class="loginloader"><i class="icon-spinner-large icon-spinner"></i> </div>
+	<!-- this div is used for request processing indication -->
+	<div id="load" class="layoutloader" style="display: none;"><i class="icon-spinner-large icon-spinner"></i></div>
+	
+	<div class="spacer visible-desktop"></div>
+	<!-- Navbar
+================================================== -->
+	<div class="navbar navbar-inverse navbar-fixed-top navigation">
+		<div class="navbar-inner">
+			<div class="primary">
+				<div class="branding nav-collapse collapse">
+					<div class="logo">
+						<!-- put logo here? -->
+					</div>
+					<h1>
+						One-NDS <span class="alt">Provisioning</span>
+					</h1>
+				</div>
+				<div class="controls">
+					<div class="links">
+						<div id="user">
+							<span class="controlspipe">|</span><span><a href="logout.htm">Logout</a></span>
+						</div>
+					</div>
+				</div>
+				<div class="nsn-logo"></div>
+			</div>
+			<div class="secondary">
+				<div class="container">
+					<div class="navi tabbable">
+						<ul class="nav-tabs">
+							
+							<li class="btn-group active"><a
+								class="btn btn-link dropdown-toggle" data-toggle="tab"
+								id="singleProvisioningTab" href="#singleProvisioning"> <span
+									class="corner-left"></span> <span class="corner-right"></span>
+									<span class="tabheading">Provisioning</span>
+							</a></li>
+							<li class="btn-group"><a
+								class="btn btn-link dropdown-toggle" data-toggle="tab"
+								href="#bulkProvisioning" id="bulkProvisioningTab"> <span
+									class="corner-left"></span> <span class="corner-right"></span>
+									<span class="tabheading">Bulk Provisioning</span>
+							</a></li> 
+							<li class="btn-group"><a
+								class="btn btn-link dropdown-toggle" data-toggle="tab"
+								href="#orderMgmt" id="orderMgmtTab"> <span
+									class="corner-left"></span> 
+									<span class="tabheading">Order Management</span>
+							</a></li>
+						</ul>
+					</div>
+					<ul class="version" id ="guiName">Version:</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container main-container tab-content row-fluid">
+		
+		<div class="tab-pane active" id="singleProvisioning">
+			<div class="navigationDiv">
+				<div class="row-fluid">
+					<div id="searchNavigation" class="span24"
+						style="position: fixed; z-index: 1029;"></div>
+				</div>
+				<div class="row-fluid" style="padding-top: 35px">
+					<div class="span24" id="errorDiv" style="display: none;">
+						<div class="span21">
+							<p align="center" class="alert-error" id="errorMessageDiv"></p>
+						</div>
+						<div class="span3">
+							<a data-toggle="modal" data-placement="right" rel="tooltip"
+								href="#moreInfoPopUp" data-original-title="" title=""> <i
+								class="icon-2x icon-info" title="more details" id="moreInfo"></i>
+							</a>
+						</div>
+					</div>
+					<p id="successDiv" align="center" class="alert-success"></p>
+					<p id="warningDiv" align="center" class="alert-warning"></p>
+				</div>
+				<div id="modal-1" class="modal hide fade" role="dialog"
+					aria-hidden="true">
+					<div class="modal-header">
+						<button type="button" class="n-btn close" data-dismiss="modal"
+							aria-hidden="true">x</button>
+						<div class="content"><h3>Create</h3></div>
+					</div>
+					<div class="modal-body">
+						<p>
+							Create New: <select name="fcoTypeForCreate" id="fcoTypeForCreate"></select>
+						</p>
+						
+					</div>
+					<div class="modal-footer">
+						<button class="btn" name="create" id="create" value="Create"
+							data-dismiss="modal" aria-hidden="true">Create</button>
+						<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+					</div>
+				</div>
+				<div id="modal-2" class="modal hide fade" role="dialog"
+					aria-hidden="true">
+					<div class="modal-header">
+						<button type="button" class="n-btn close" data-dismiss="modal"
+							aria-hidden="true">x</button>
+						<div class="content"><h3>ChangeId</h3></div>
+					</div>
+					<div class="modal-body">
+						<p>
+							On : <select name="fcoTypeForChangeId" id="fcoTypeForChangeId"></select>
+						</p>
+					</div>
+					<div class="modal-footer">
+						<button class="btn" name="ChangeId" data-dismiss="modal"
+							aria-hidden="true" id="ChangeId" value="ChangeId">Change
+							Id</button>
+						<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+					</div>
+				</div>
+				<div id="modal-3" class="modal hide fade" role="dialog"
+					aria-hidden="true">
+					<div class="modal-header">
+						<button type="button" class="n-btn close" data-dismiss="modal"
+							aria-hidden="true">x</button>
+						<div class="content"><h3>Extended Operations</h3></div>
+					</div>
+					<div class="modal-body">
+						<p>
+							Operation : <select name="extendedOperation"
+								id="extendedOperation"></select>
+						</p>
+					</div>
+					<div class="modal-footer">
+						<button class="btn" name="extendedOperationSubmit"
+							data-dismiss="modal" aria-hidden="true"
+							id="extendedOperationSubmit" value="Submit">Submit</button>
+						<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+					</div>
+				</div>
+				<div id="modal-4" class="modal hide fade" role="dialog"
+					aria-hidden="true">
+					<div class="modal-header">
+						<button type="button" class="n-btn close" data-dismiss="modal"
+							aria-hidden="true">x</button>
+						<div class="content"><h3>Search All</h3></div>
+					</div>
+					<div class="modal-body">
+						<p>
+							On: <select name="fcoTypeForSearchAll" id="fcoTypeForSearchAll"></select>
+						</p>
+						
+					</div>
+					<div class="modal-footer">
+						<button class="btn" name="SearchAll" id="SearchAll" value="SearchAll"
+							data-dismiss="modal" aria-hidden="true">SearchAll</button>
+						<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+					</div>
+				</div>
+				
+
+			</div>
+			<div id="fcoAccordin" style="display: none"></div>
+			<div>
+				<div>
+
+					<div id="mainDiv" class="row-fluid"
+						style="display: none;"></div>
+				</div>
+			</div>
+			
+			<div id="scripts"></div>
+
+		</div>
+
+		<div class="tab-pane" id="bulkProvisioning">
+			<div class="row-fluid">
+				<div class="span24" id="bulkErrorDiv" style="display: none;">
+					<div class="span21">
+						<p align="center" class="alert-error" id="bulkErrorMessageDiv"></p>
+					</div>
+					<div class="span3">
+						<a data-toggle="modal" data-placement="right" rel="tooltip"
+							href="#moreInfoPopUp" data-original-title="" title=""> <i
+							class="icon-2x icon-info" title="more details" id="bulkMoreInfo"></i>
+						</a>
+					</div>
+				</div>
+				<p id="bulkSuccessDiv" align="center" class="alert-success"></p>
+				<p id="bulkWarningDiv" align="center" class="alert-warning"></p>
+			</div>
+			<div class="row-fluid">
+				<div id="bulkNavigationDiv" class="span24"></div>
+			</div>
+		</div>
+
+		<div class="tab-pane" id="orderMgmt">
+			<div class="row-fluid">
+				<div class="span24 alert-error" id="orderMgmtErrorDiv" style="display: none;">
+						<p id="orderMgmtErrorMessageDiv"></p>
+				</div>
+				<p id="orderMgmtSuccessDiv" class="alert" style="display: none;"></p>
+				<div class="alert" id="orderMgmtWarningDiv" class="span24" style="display: none;">
+					<p id="orderMgmtWarningMessageDiv" ></p>
+  				</div>
+			</div>
+			<div class="row-fluid">
+				<div id="orderMgmtDiv" class="span16"></div>
+				<div id="orderMgmtResponseDiv" ></div>
+			</div>
+		</div>
+		
+		<div id="moreInfoPopUp" class="modal hide fade" role="dialog"
+			aria-hidden="true">
+			<div class="modal-header">
+				<button type="button" class="n-btn close" data-dismiss="modal"
+					aria-hidden="true">x</button>
+			<div class="content"><h3>Error Details<h3></div>
+			</div>
+			<div style="overflow: scroll" id="errorDetails"></div>
+			<div class="modal-footer">
+				<button id="errorDetailsOkBtn" class="btn" data-dismiss="modal"
+					aria-hidden="true">Ok</button>
+			</div>
+		</div>
+		<div class="footer fixed">&copy; 2014 Nokia Solutions and
+			Networks. All rights reserved.</div>
+	</div>
+	<script type="text/javascript"
+		src="resources/framework/js/lib/jquery-1.9.0.min.js"></script>
+	<script type="text/javascript"
+		src="resources/framework/js/lib/jquery.tablesorter.min.js"></script>
+		
+	<script data-main="resources/framework/js/conf/require-config.js"
+		src="resources/framework/js/lib/require.js"></script>
+
+	<script type="text/javascript"
+		src="resources/BT/2.3.2/js/libs/bootstrapTouch.js"></script>
+	<script type="text/javascript"
+		src="resources/framework/js/util/FrameworkUtility.js"></script>
+</body>
+</html>

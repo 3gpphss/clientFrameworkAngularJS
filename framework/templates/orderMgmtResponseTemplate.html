@@ -1,0 +1,95 @@
+<div>
+	<div class="offset15">
+		<div class="box-content">
+			<span>Last Refresh Time: </span> <span><%=lastRefreshTime%></span>
+		</div>
+	</div>
+	<div class="span24 padding-top-bottom-15">
+		<div class="box box-dashboard">
+			<div class="box-content no-padding">
+				<table
+					class="table ordmgmttable table-bordered table-striped table-hover table-header table-footer ordmgmttable-condensed table-shadow ordermgmttable-sortable"
+					data-sort="true" id="bulkOrders">
+					<thead>
+						<tr>
+							<th class="span3 sortable ordermgmtsort" id="userName">User
+								Name <i class="icon icon-sort-up when-up"></i> <i
+								class="icon icon-sort-down when-down"></i> <i
+								class="icon icon-sort when-none"></i>
+							</th>
+							<th class="span3 sortable ordermgmtsort" id="extendedFileName">
+								Order File Name <i class="icon icon-sort-up when-up"></i> <i
+								class="icon icon-sort-down when-down"></i> <i
+								class="icon icon-sort when-none"></i>
+							</th>
+							<th class="span3">Execution Start Time</th>
+							<th class="span3 sortable sortable-down ordermgmtsort"
+								id="initialTimeStamp">Submission Time <i
+								class="icon icon-sort-up when-up"></i> <i
+								class="icon icon-sort-down when-down"></i> <i
+								class="icon icon-sort when-none"></i>
+							</th>
+							<th class="span2 sortable ordermgmtsort" id="status">Status
+								<i class="icon icon-sort-up when-up"></i> <i
+								class="icon icon-sort-down when-down"></i> <i
+								class="icon icon-sort when-none"></i>
+							</th>
+							<th class="span3">Last State Update</th>
+							<th class="span2">Successful/Matched Count</th>
+							<th class="span2">Failed Count</th>
+							<th class="span2">Successful %</th>
+							<th class="span2">Details</th>
+							<th class="span2">Cancel</th>
+						</tr>
+					</thead>
+				</table>
+					<div>					
+					<div class="scrollbars vertical">					
+						<table
+							class="table ordmgmttable table-bordered table-striped table-hover table-header table-footer ordmgmttable-condensed table-shadow ordermgmttable-sortable"
+							data-sort="true" id="bulkOrders">
+							<tbody id="OrderMgmtResponseData">
+							</tbody>
+							<!-- <tfoot>
+                    <tr>
+                        <td colspan="8">
+                        </td>
+                        <td colspan="3">
+                            <div class="pagination pagination-right pagination-small">
+                                <ul>
+                                    <li>
+                                        <a href="#"><i class="icon-caret-left"></i></a>
+                                    </li>
+                                    <li class="active">
+                                        <a href="#">1</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">2</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="icon-caret-right"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+				
+                        </td>
+                    </tr>
+                    </tfoot> -->
+
+						</table>					
+					</div>					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="orderDetails"></div>
+
+<script type="text/javascript">
+$('.scrollbars').scrollbars({
+	alwaysVisible : true,
+	railVisible: false,
+	distance : '1px',
+	height: '450px'
+});
+</script>

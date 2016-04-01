@@ -1,0 +1,518 @@
+/****************************************************************************
+	common @vantage styles
+	to be used by all @dvantage HTML/JSP GUIs
+	for Netscape 4.76 and MS IE 5.5
+*/
+
+
+/* All Templates : Whole page */
+
+.hint			{}
+.help			{}
+.info			{}
+a			{color: #000000; text-decoration: none;}
+a:hover 		{color: #4F0000; text-decoration: underline;}
+body			{margin-left: 0px; margin-right: 0px; margin-top: 0px; margin-bottom: 0px;}
+.ad_message		{font-family:"NokiaPure", Arial, Helvetica, sans-serif;
+			 color: #0000BB;
+			  margin-top: 12px; margin-bottom: 12px;
+			 margin-left: 4px; margin-right: 4px;
+			 text-decoration: none; font-size: 11pt; font-weight: bold;}
+.ad_warning		{font-family:"NokiaPure", Arial, Helvetica, sans-serif;
+			 color: #FF9900;
+			 margin-top: 12px; margin-bottom: 12px;
+			 margin-left: 4px; margin-right: 4px;
+			 text-decoration: none; font-size: 11pt; font-weight: bold;}
+.ad_error		{font-family: "NokiaPure", Arial, Helvetica, sans-serif;
+			 color: #EE0A3A;
+			 margin-top: 12px; margin-bottom: 12px;
+			 margin-left: 4px; margin-right: 4px;
+			 text-decoration: none; font-size: 11pt; font-weight: bold;}
+.datafont {  font-family: 'NokiaPure', Arial, Helvetica, sans-serif; font-size: 8pt}
+.ad_text		{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			color: #000000;
+			 margin-top: 12px; margin-bottom: 12px;
+			 margin-left: 4px; margin-right: 4px;
+			 text-decoration: none; font-size: 10pt; font-weight: normal;}
+#ad_border		{bordercolor: #999999;}
+
+#ad_background		{background-color: #E6E6E6;}
+#ad_background_disabled {bgcolor: #E6E6E6;}
+
+input		{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;}
+select		{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;}
+textarea	{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;}
+
+
+/* Main Template : Top area section */
+
+#ad_toparea		{background-color: #FE9900;}          /* Top area in orange */
+#ad_topframe		{background-color: #FDFCCC;}          /* Top left corner (logo) area */
+
+
+
+/* Main Template : Status bar section */
+
+.ad_application_name	{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 10pt; font-weight: normal; text-decoration: none;
+			 color: #000000; background-color: #FFCB05;}       /* area below logo(dark yellow) */ 
+.ad_page_title		{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 12pt; font-weight: bold; text-decoration: none;
+			 color: #00000;}
+.ad_title		{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 12pt; font-weight: bold; text-decoration: none;
+			 left: 240px; top: 6px;
+			 color: #FFFFFF;}
+.ad_status_info		{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 10pt; font-weight: normal; text-decoration: none;
+			 margin-left: 4px; margin-right: 4px;
+			 color: #FFFFFF;}     			/*'logged in' in white colour*/
+.ad_status_info_inverse {font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 10pt; font-weight: normal; text-decoration: none;
+			 margin-left: 4px; margin-right: 4px;
+			 color: #000000; background-color: #FFFFFF;}
+.ad_ontoplink		{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 9pt; font-weight: bold; text-decoration: none;
+			 color: #FFFFFF;}
+
+
+/* Main Template : Navigation section */
+
+.ad_menu		{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 10pt; font-weight: bold; text-decoration: none;
+			 color: #000000;}
+.ad_menu_highlight	{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 10pt; font-weight: bold; text-decoration: none;
+			 color: #000000; background-color: #999999;}
+.ad_sub_menu		{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 9pt; font-weight: normal; text-decoration: none;
+			 color: #000000;}
+.ad_sub_menu_highlight	{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 9pt; font-weight: normal; text-decoration: none;
+			 color: #000000; background-color: #999999;}
+.ad_sub_sub_menu	{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 9pt; font-weight: normal; text-decoration: none;
+			 color: #000000;}
+.ad_sub_sub_menu_highlight {font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 9pt; font-weight: normal; text-decoration: none;
+			 color: #000000; background-color: #999999;}
+.ad_menue		{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 10pt; font-weight: bold; text-decoration: none;
+			 margin-left: 6px; margin-right: 2px;
+			 color: #000000;}
+.ad_menue_highlight	{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 10pt; font-weight: bold; text-decoration: none;
+			 margin-left: 6px; margin-right: 2px;
+			 color: #000000; background-color: #999999;}
+.ad_sub_menue		{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 9pt; font-weight: normal; text-decoration: none;
+			 margin-left: 9px; margin-right: 2px;
+			 color: #000000;}
+.ad_sub_menue2    {font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+       font-size: 9pt; font-weight: normal; text-decoration: none;
+       color: #000000;}
+.ad_sub_menue_highlight	{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 9pt; font-weight: normal; text-decoration: none;
+			 margin-left: 9px; margin-right: 2px;
+			 color: #000000; background-color: #999999;}
+.ad_sub_sub_menue	{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 9pt; font-weight: normal; text-decoration: none;
+			 margin-left: 12px; margin-right: 2px;
+			 color: #000000;}
+.ad_help_menu {font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+       font-size: 8pt; font-weight: normal; text-decoration: none;
+       /*font-style:italic;*/
+       color: #000000;}
+
+.ad_sub_sub_menue_highlight {font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 9pt; font-weight: normal; text-decoration: none;
+			 margin-left: 12px; margin-right: 2px;
+			 color: #000000; background-color: #999999;}
+#menue_highlight	{background-color: #999999;}
+#ad_navigation          {background-color: #FDFCCC;}    /* navigation area (cream colour) */
+
+
+
+/* Main Template : Work area section */
+
+.ad_help		{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 10pt; font-weight: normal; text-decoration: none;
+			 color: #000000;}
+.ad_link		{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 10pt; font-weight: normal;
+			 color: #000000;}
+.ad_wa_head		{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 10pt; font-weight: normal; text-decoration: none;
+			 margin-left: 8px; margin-right: 8px;
+			 color: #000000;}
+.ad_workarea_title	{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 12pt; font-weight: normal; text-decoration: none;
+			 color: #000000;}
+.ad_wa_title		{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 12pt; font-weight: normal; text-decoration: none;
+			 margin-left: 8px; margin-right: 8px;
+			 color: #000000;}
+.ad_wa_title_bold	{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 12pt; font-weight: bold; text-decoration: none;
+			 margin-left: 8px; margin-right: 8px;
+			 color: #000000;}
+.ad_workarea_body	{font-family: 'NokiaPure', Arial, Helvetica,  sans-serif;
+			 font-size: 10pt; font-weight: normal; text-decoration: none;
+			 color: #000000;}
+.ad_workarea_input	{font-family:  Verdana, sans-serif;
+			 font-size: 10pt; font-weight: normal; text-decoration: none;
+			 color: #000000;}			 
+.ad_wa_body		{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 10pt; font-weight: normal; text-decoration: none;
+			 margin-left: 80px; margin-right: 40px;
+			 color: #00000;}
+.ad_valuename		{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 10pt; font-weight: normal; text-decoration: none;
+			 margin-left: 8px; margin-right: 4px;
+			 color: #000000;}
+.ad_main_buttons	{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 10pt; font-weight: normal; text-decoration: none;
+			 color: #000000; background-color: #CCCCCC;}
+.ad_search_buttons	{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 10pt; font-weight: normal; text-decoration: none;
+			 color: #000000; background-color: #CCCCCC;}
+.ad_select		{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 10pt; font-weight: normal; text-decoration: none;
+			 color: #000000; background-color: #CCCCCC;}
+.ad_main_selectbox	{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 10pt; font-weight: normal; text-decoration: none;
+			 margin-left: 8px; margin-right: 8px;
+			 color: #000000; background-color: #CCCCCC;}
+.ad_disabled		{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 10pt; font-weight: normal; text-decoration: none;
+			 color: #000000; bgcolor: #E6E6E6;}
+.ad_data_display	{font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 10pt; font-weight: normal; text-decoration: none;
+			 margin-left: 2px; margin-right: 2px;
+			 color: #000000;}
+			 
+.ad_mandatory_param	{font-family:'NokiaPure', Arial, Helvetica; font-size: 16pt; color: #EE0A3A;}
+
+/*force no background image to these 'body' elements, as WULF provides the default background image to the 'body' elements*/
+#ad_workarea		{background-color:transparent; background-image:none; filter:none;}
+
+#ad_grid		{bordercolor=#000000; bordercolorlight=#666666; bordercolordark=#000000; bgcolor=#000000;}
+
+.ad_workarea_input_disabled	{font-family:  Verdana, sans-serif;
+			 font-size: 10pt; font-weight: normal; text-decoration: none;
+			 color: #000000;background-color: #CCCCCC;}	
+			 
+			 
+#tipBox 		{position: absolute; 
+			 font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+			 font-size: 10pt; font-weight: normal;
+  		         width: 150px; 
+  		         z-index: 100;  		         
+  		         background-color: White; 
+  		         visibility: hidden}
+
+
+
+
+/* Tabcards section */
+
+/* #ad_workarea_tab_highlight {background-color: #CCCCCC;}  */ /* commented to have only one uniform logo all over the page*/
+#ad_workarea_tab_titlehighlight {background-color: #CCCCCC;}
+#ad_workarea_tab_dark {background-color: #999999;}
+#ad_workarea_tab_border {background-color: #666666;}
+#ad_workarea_tab_top {xbackground-color: #666666;}
+
+
+/* Tabcards section with gifs */
+
+!-- RC_JSP_34 :cursor is owervritten by unsupported value (hand) . -->
+  .tab{
+        //background-image: url(../gif/tab-dark.gif);
+        background-image: url(../images/tabs.png);
+    color: #000000;
+    border:2px;
+    position: absolute;
+    top: 134px;
+    width: 100px;
+    text-align: left;
+    font: 10pt 'NokiaPure', Arial, Helvetica,sans-serif;
+    z-index: 2;
+    padding: 3px;
+    cursor: pointer;
+
+  }
+
+.tab:hover{
+        //background-image: url(../gif/tab-light.gif);
+        //background-image: url(../images/tabs.png);
+background-image: "url('../images/tabs.png') no-repeat left -35px";
+    color: #000000;
+    position: absolute;
+    top: 130px;
+    width: 140px;
+    text-align: left;
+    font: 10pt Verdana,sans-serif;
+    z-index: -1;
+    padding: 9px;
+    cursor: pointer;
+ }
+
+
+ .paneltab{
+    position: absolute;
+    top: 165px;
+    left: 11px;
+    width: 98%;
+    height: 96%;
+    visibility: hidden;
+    font: 12pt Verdana,sans-serif;
+    /* background-image: url(../gif/tab-light-below.gif); */
+    /* manjs */
+    background-image: url(../images/light_background_for_panels_manjs.PNG);
+    color: yellow;
+    border: 0;
+    padding: 0;
+    overflow: none;
+  }
+
+
+
+
+  .panelAction{
+    position: absolute;
+    top: 1200px;
+    left: 10px;
+    width: 50%;
+    z-index: 1;
+    height: 5%;
+    visibility: hidden;
+    font: 12pt Verdana,sans-serif;
+    color: navy;
+    border: 0;
+    padding: 0;
+    overflow: auto;
+  }
+
+<!-- Tab color related information added for LTE tabs -->
+.tabs {
+border-style: none;
+padding: 0px;
+border-spacing: 0px;
+border
+empty-cells: show;
+width: 100%;
+height: 100%;
+}
+
+.tabs_lte {
+border-style: none;
+padding: 0px;
+border-spacing: 0px;
+border
+empty-cells: show;
+width: 100%;
+}
+
+/*td.active {
+background-color: #E6E6E6 ! important;
+width: 14% ! important;
+}
+
+td.inactive {
+background-color: #999999 ! important;
+width: 14% ! important;
+}
+
+td.activeSub {
+background-color: #E6E6E6 ! important;
+border-top: 0px none ! important;
+border-right: 0px none ! important;
+border-bottom: 0px none ! important;;;
+}
+
+
+td.inactiveSub {
+background-color: #999999 ! important;
+}
+
+td.tabContent {
+background-color: #E6E6E6 ! important;
+border-top: 0px none ! important;
+padding: 5px ! important;
+}
+
+td.active input{
+background-color: #E6E6E6 ! important;
+font-weight: bold;
+color: #333333;
+}
+
+td.inactive input {
+background-color: #999999 ! important;
+color: #333333;
+font-weight: bold;
+}
+*/
+
+/*
+  #ad_workarea_gif_titlehighlight {background-image: url(../gif/tab-light.gif); xbackground-color: #CCCCCC;}
+  #ad_workarea_gif_dark {background-image: url(../gif/tab-dark.gif); xbackground-color: #999999;}               
+*/
+#ad_workarea_gif_titlehighlight {background-color: #FDFCCC;}    /*light yellow*/
+#ad_workarea_gif_dark {background-color: #FFCB05;}              /*orange */
+ 
+/* Order Management GUI colors for Orders Display */
+		
+.ad_omg_red    { color: #FF0000;
+			             font-weight: bold;}
+.ad_omg_green  { color: #006400;
+		                 font-weight: bold;}
+.ad_omg_indigo { color: #4B0082;
+		                 font-weight: bold;}
+.ad_omg_orange { color: #FF8C00;
+                 font-weight: bold;}
+                 
+/* PlatformAdvantage private section */
+
+
+/* ParlayAdvantage private section */
+
+
+/* PaymentAdvantage private section */
+
+
+
+/* INAdvantage private section */
+
+.toplefttab
+{
+    /* display: block; */
+    display: inline;
+    position: absolute;
+    top: 134;
+    left: 10;
+    margin-left: 5px;
+    width: 5px;
+    height: 5%;
+    background: transparent url(../images/tabs.png) no-repeat right top;
+}
+
+.marginleft
+{
+    margin-left:-2px;
+}
+
+
+
+.span.topleftelem {
+    background: transparent url("../images/tabs.png") no-repeat scroll left top;
+    /* background: transparent url("../images/panel-white.png") no-repeat scroll left top;
+     background: transparent url("ages/../images/light_background_for_panels_manjs.PNG") no-repeat scroll left top; */
+    display: block;
+    height: 35px;
+    left: 16;
+    margin-left: -9px;
+    position: absolute;
+    top: 134;
+    width: 10px;
+    z-index: -1;
+}
+
+
+/* left crner of a tab */
+.leftcorner {
+
+    background: transparent url("../images/tabs.png") no-repeat scroll left top;
+    /* background: transparent url("../images/panel-white.png") no-repeat scroll left top;
+     background: transparent url("ages/../images/light_background_for_panels_manjs.PNG") no-repeat scroll left top; */
+    display: block;
+    height: 35px;
+    left: 16;
+    margin-left: -9px;
+    position: absolute;
+    top: 134;
+    width: 10px;
+    z-index: -1;
+}
+
+
+/* Fonts start */
+
+@font-face {
+    font-family: 'NokiaPure';
+    src: url('../fonts/NokiaPureHWeb_Lt.eot');
+    src: url('../fonts/NokiaPureHWeb_Lt.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/NokiaPureHWeb_Lt.woff') format('woff'),
+         url('../fonts/NokiaPureHWeb_Lt.ttf') format('truetype'),
+         url('../fonts/NokiaPureHWeb_Lt.svg#NokiaPureHWebLight') format('svg');
+    font-weight: 300;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'NokiaPure';
+    src: url('../fonts/NokiaPureHWeb_Rg.eot');
+    src: url('../fonts/NokiaPureHWeb_Rg.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/NokiaPureHWeb_Rg.woff') format('woff'),
+         url('../fonts/NokiaPureHWeb_Rg.ttf') format('truetype'),
+         url('../fonts/NokiaPureHWeb_Rg.svg#NokiaPureHWebRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'NokiaPure';
+    src: url('../fonts/NokiaPureHWeb_Bd.eot');
+    src: url('../fonts/NokiaPureHWeb_Bd.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/NokiaPureHWeb_Bd.woff') format('woff'),
+         url('../fonts/NokiaPureHWeb_Bd.ttf') format('truetype'),
+         url('../fonts/NokiaPureHWeb_Bd.svg#NokiaPureHWebBold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* Fonts End */
+
+
+
+.bodyfont{
+   font-family: 'NokiaPure', sans-serif;
+   font-size: 8px;
+   line-height: 26px;
+   color: #1b1b1b;
+   /* font-weight: bold; */
+    font-weight: 300;
+}
+#QOFServCreateForm__idJsp8 .myFaces_panelTabbedPane_activeHeaderCell input, #QOFServCreateForm__idJsp8 .myFaces_panelTabbedPane_pane, #QOFServCreateForm__idJsp8 .myFaces_panelTabbedPane_subHeaderCell {
+    background-color: transparent !important;
+}
+
+.ad_wa_nsr_disp             {font-family: 'NokiaPure', Arial, Helvetica, sans-serif; font-size: 10pt; font-weight: normal; text-decoration: none;  color: #00000;}
+
+.emptySpace150{
+	width:150px;
+}
+
+.ad_wa_body{
+   font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+   font-weight: normal;
+   text-decoration: none;
+   margin-left: 80px;
+   margin-right: 40px;
+  color: #000000;
+}
+
+.ad_wa_order{
+   font-family: 'NokiaPure', Arial, Helvetica, sans-serif;
+   font-size: 10pt; font-weight: normal; text-decoration: none;
+   margin-left: 80px; margin-right: 40px;
+  color: #000000;
+}
+
+.helptext {
+  display: inline;
+  padding-left: 9px;
+  white-space: normal;
+}

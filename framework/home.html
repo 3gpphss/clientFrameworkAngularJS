@@ -1,0 +1,196 @@
+<html ng-app="threeGppHssApp">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=9,chrome=1">
+<meta name="viewport" content="width=1158">
+<meta name="msapplication-tap-highlight" content="no">
+<link rel="stylesheet" type="text/css" href="resources/framework/css/styles.css">
+<link rel="stylesheet" type="text/css" href="resources/framework/css/tree_styles.css">
+<link rel="stylesheet" type="text/css" href="resources/framework/css/advantage.css">
+<link href="resources/framework/wulfdist/css/wulf.css" rel="stylesheet">
+
+
+<script src="resources/framework/js/tree.js" type="text/javascript"></script>
+<script type="text/javascript" src="resources/framework/wulfdist/js/dependencies/jquery.js"></script>
+<script type="text/javascript"
+	src="resources/framework/wulfdist/js/dependencies/bootstrap.js"></script>
+<script type="text/javascript" src="resources/framework/wulfdist/js/wulf-concat-deps.js"></script>
+<script type="text/javascript" src="resources/framework/wulfdist/js/wulf.js"></script>
+
+<script type="text/javascript" src="resources/framework/js/jquery.min.js"></script>
+<script type="text/javascript" src="resources/framework/js/jquery.js"></script>
+<script type="text/javascript" src="resources/framework/js/nsnkit.js"></script>
+<script type="text/javascript" src="resources/framework/js/backgrounds.js"></script>
+<script type="text/javascript" src="resources/framework/js/navigation.js"></script>
+<script type="text/javascript" src="resources/framework/js/tree_002.js"></script>
+<script type="text/javascript" src="resources/framework/js/tree.js"></script>
+<script type="text/javascript" src="resources/framework/js/panel.js"></script>
+
+
+
+<script type="text/javascript" src="resources/framework/js/angular.min.js"></script>
+<script type="text/javascript" src="resources/framework/js/angular-ui-router.js"></script>
+<script type="text/javascript" src="resources/framework/js/angular-route.min.js"></script>
+
+<!-- custom javascripts -->
+<script type="text/javascript" src="resources/framework/3gppHss/Navigator.js"></script>
+<script type="text/javascript" src="resources/framework/3gppHss/CommonFactory.js"></script>
+<script type="text/javascript" src="resources/framework/3gppHss/SPMLRequestType.js"></script>
+<script type="text/javascript" src="resources/framework/3gppHss/RESTProvider.js"></script>
+<script type="text/javascript" src="resources/framework/3gppHss/RESTProcessor.js"></script>
+<script type="text/javascript" src="resources/framework/3gppHss/PCType.js"></script>
+<script type="text/javascript" src="resources/framework/3gppHss/CommonController.js"></script>
+<script type="text/javascript" src="resources/framework/AUC/AUCController.js"></script>
+
+
+
+<script type="text/javascript">
+var absolutePath = '/SpringMVC';
+var commonBase=absolutePath + '/jsp/usermanagement/Common.jsp';
+var common=commonBase+'?pagename=';
+var initial='&initial=true&reset=true&ctsub=false&tsub=false&nsr=false';
+var initial1='&initial=true&reset=true&tsub=false&ct&nsr=false';
+var initialM='&initial=true&reset=true&tsub=false&ctsub=false&nsr=false';
+var initialT = '&initial=true&reset=true&tsub=true&ctsub=false' ;
+var initialCBT ='&initial=true&reset=true&ctsub=true&tsub=false';
+
+
+
+ function buildFrameURL(commonURL,pageSpecificURL,initialURL,aElem){
+ 	window.top.frames['mainFrame'].location.href = commonURL+pageSpecificURL+initialURL;
+}
+ 
+ function check(id) {
+		
+		if (id =='val1'&& document.getElementById(id).checked == true)
+			{
+			 document.getElementById("gsmAlgo").disabled = false;
+			 document.getElementById("umtsAlgo").disabled = true;
+			 document.getElementById("amf").disabled = true;
+			 document.getElementById("sqn").disabled = true;
+			 document.getElementById("opcEncKey").disabled = true;
+			}
+		else if (id =='val2'&& document.getElementById(id).checked == true)
+	       {
+			document.getElementById("gsmAlgo").disabled = true;
+			 document.getElementById("umtsAlgo").disabled = false;
+			 document.getElementById("amf").disabled = false;
+			 document.getElementById("sqn").disabled = false;
+			 document.getElementById("opcEncKey").disabled = false;
+	       }	
+	}
+</script>
+
+
+</head>
+<body style="padding-top: 80px; visibility: visible;" id="ad_mainframe"
+	class="gray-gradient" topmargin="0" leftmargin="0" rightmargin="0"
+	marginheight="0" marginwidth="0">
+	<div class="navigation">
+		<div class="navigation-inner">
+			<div class="primary">
+				<!-- <div class="fill-left"></div>-->
+				<div class="fill-right"></div>
+				<div class="content" style="padding-top: 10px;">
+					<div class="logo"></div>
+					<h1 style="padding-top: 0px;">3GPP HSS GUI</h1>
+					<div class="controls">
+						<div class="links">
+							<ul>
+								<li><a href="#"> <span class="icon user"></span>
+										commonUser
+								</a></li>
+								<li>|</li>
+								<li><a href="#" target="_blank">Help</a></li>
+								<li></li>
+								<li>|</li>
+								<li><a href="#"> Log Out </a></li>
+							</ul>
+							<div class="links-inner"></div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="secondary multiple-tabs">
+				<div class="fill-left"></div>
+				<div class="fill-right"></div>
+				<div class="content">
+					<div class="tabs-outer">
+						<ul class="tabs menu">
+							<li class="selected"><a id="HssAdministration" href="#"><span>
+										Provisioning </span></a></li>
+							<li><a id="GeneralHssAdministration" href="#"><span>
+										Bulk </span></a></li>
+							<li class="last-child"><a id="OrderManagement" href="#"><span>
+										Order Management </span></a></li>
+						</ul>
+						<div class="tab-cover"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="grid span-38 centered vpush-2">
+		<div class="span-8 panel vertical-menu">
+			<div class="content">
+				<div class="topleft"></div>
+				<div class="inner">
+					<ul class="tree">
+						<li class="branch expanded"><a href="#"
+							style="padding-left: 10px;"><span class="content"><div
+										class="topleft"></div> <span class="arrow"></span><span
+									class="text">Subscriber</span></span></a>
+							<ul>
+								<li class="leaf"><a ui-sref="auc"
+									style="padding-left: 30px;"><span class="content"><div
+												class="topleft"></div> <span class="bullet"></span><span
+											class="text">Create</span></span></a></li>
+								<li class="leaf"><a ui-sref="subscriberSearch"
+									style="padding-left: 30px;"><span class="content"><div
+												class="topleft"></div> <span class="bullet"></span><span
+											class="text">Search</span></span></a></li>
+							</ul></li>
+						<li class="branch expanded"><a href="#"
+							style="padding-left: 10px;"><span class="content"><div
+										class="topleft"></div> <span class="arrow"></span><span
+									class="text">NSR</span></span></a>
+							<ul>
+								<li class="leaf selected"><a href="#"
+									style="padding-left: 30px;"><span class="content"><div
+												class="topleft"></div> <span class="bullet"></span><span
+											class="text">HSS</span></span></a></li>
+								<li class="leaf selected"><a href="#"
+									style="padding-left: 30px;"><span class="content"><div
+												class="topleft"></div> <span class="bullet"></span><span
+											class="text">HLR</span></span></a></li>
+								<li class="leaf selected"><a href="#"
+									style="padding-left: 30px;"><span class="content"><div
+												class="topleft"></div> <span class="bullet"></span><span
+											class="text">LTE</span></span></a></li>
+							</ul></li>
+						<li class="branch expanded"><a href="#"
+							style="padding-left: 10px;"><span class="content"><div
+										class="topleft"></div> <span class="arrow"></span><span
+									class="text">MSS Multi Sim</span></span></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="bottom">
+				<div></div>
+			</div>
+		</div>
+		<div class="span-28 panel" ng-controller="aucController"
+			ng-init="aucData={}; local={}; searchCondition={};">
+			{{common.errorMessage}}
+			<div ui-view="commonView"></div>
+			<div ui-view="applicationView"></div>
+			<div ui-view="dataView"></div>
+			<div ui-view="footerButtonsView"></div>
+			<div ui-view="subscriberSearchView"></div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<% if (bulkHistoryCollection!= undefined ) {
+						_.each(bulkHistoryCollection.models, function(bulkHistory){ 
+						 %>
+						<tr>
+							<td class="span3"><% 
+						if (bulkHistory.has('subRequests')) {  %><i class="icon-plus-sign main" id="om<%= bulkHistory.get('requestId') %>" style="cursor:pointer"></i>
+							<%} %>
+						<%= bulkHistory.get('userName') %></td>
+							<td class="span3"><%= bulkHistory.get('extendedFileName') %></td>
+							<td class="span3">
+								<div class="datetimepicker span24" id = "scheduler<%= bulkHistory.get('requestId')%>" style="display: none;">
+ 									
+ 									 <div class="datepicker" data-with-time="true">
+										<div class="input-append span24">
+											<input type="text" class = "timeScheduler span20"
+											data-id="<%= bulkHistory.get('requestId')%>"
+											value="<%= bulkHistory.get('scheduledExecutionTime') %>"
+											name="subscriptionExpiryDate"
+											title="dd-MM-yyyy hh:mm:ss Format.e.g.21-07-2008 12:24:50"
+											placeholder="dd-MM-yyyy hh:mm:ss Format.e.g.21-07-2008 12:24:50"						
+											 data-disable_prevdate="true" data-format="D-M-Y" id = "timeScheduler<%= bulkHistory.get('requestId')%>">
+											<span class="icon-calendar" data-toggle="datepicker">
+											</span>
+										</div>
+									</div> 
+								</div> 
+								<div class="disabledtimer span24" id ="disabledtimer<%= bulkHistory.get('requestId')%>" style="display: none;">
+									<input class = "span23" type="text" disabled="disabled">
+								</div>
+							</td>
+							<td class="span3"><%= bulkHistory.get('initialTimeStamp') %></td>
+							<td class = "status span2" id="status<%= bulkHistory.get('requestId')%>">
+								<strong><%= bulkHistory.get('status') %></strong>
+							</td>
+							<td class="span3"><%= bulkHistory.get('lastUpdatedTimestamp')%></td>
+							<td class="span2" style="text-align:right;"><%=bulkHistory.get('numberOfRequestsExecuted')%></td>
+							<td class="span2" style="text-align:right;"><%=bulkHistory.get('numberOfRequestsFailed')%></td>
+							<td class="span2" style="text-align:right;"><%= bulkHistory.get('successPercnetage')%></td>
+							<td class="span2">
+								<a href="#modal-order" role="button" data-toggle="modal">
+								<button class="btn details span" data-id="<%= bulkHistory.get('requestId')%>" id="details<%= bulkHistory.get('requestId')%>">Details</button></a>
+							</td>
+							<td class="span2" style="text-align:center">								
+								<button class="cancel-alarm cancel" data-id="<%= bulkHistory.get('requestId')%>" id="cancel<%= bulkHistory.get('requestId')%>" ></button>								  								
+							</td>
+						</tr>
+						
+						<% 
+						if (bulkHistory.has('subRequests')) {  %>
+
+						<tr id="om<%= bulkHistory.get('requestId') %>_child" style="display:none;"><td colspan="11" style="padding:0px; border:1px,0px">
+							<table class="ordmgmttable" id = "subBulkOrders">
+
+						<% _.each((bulkHistory.get('subRequests').models), function(bulkSubHistory){ %>
+						
+							
+							<tr>
+							<td class="span3">&nbsp;</td>
+							<td class="span3"><%= bulkSubHistory.get('extendedFileName') %></td>
+							<td class="span3">
+								<div class="datetimepicker span24" id = "scheduler<%= bulkHistory.get('requestId')%>" style="display: none;">
+ 									 <div class="datepicker" data-with-time="true">
+										<div class="input-append span24">
+											<input type="text" class = "timeScheduler span20"
+											data-id="<%= bulkHistory.get('requestId')%>"
+											value="<%= bulkHistory.get('scheduledExecutionTime') %>"
+											name="subscriptionExpiryDate"
+											title="dd-MM-yyyy hh:mm:ss Format.e.g.21-07-2008 12:24:50"
+											placeholder="dd-MM-yyyy hh:mm:ss Format.e.g.21-07-2008 12:24:50"						
+											 data-disable_prevdate="true" data-format="D-M-Y" id = "timeScheduler<%= bulkHistory.get('requestId')%>">
+											<span class="icon-calendar" data-toggle="datepicker">
+											</span>
+										</div>
+									</div> 
+								</div> 
+								<div class="disabledtimer span24" id ="disabledtimer<%= bulkHistory.get('requestId')%>" style="display: none;">
+									<input class = "span23" type="text" disabled="disabled">
+								</div>
+							</td>
+							<td class="span3"><%= bulkSubHistory.get('initialTimeStamp') %></td>
+							<td class = "status span2" id="status<%= bulkSubHistory.get('requestId')%>">
+								<strong><%= bulkSubHistory.get('status') %></strong>
+							</td>
+							<td class="span3"><%= bulkSubHistory.get('lastUpdatedTimestamp')%></td>
+							<td class="span2" style="text-align:right;"><%=bulkSubHistory.get('numberOfRequestsExecuted')%></td>
+							<td class="span2" style="text-align:right;"><%=bulkSubHistory.get('numberOfRequestsFailed')%></td>
+							<td class="span2" style="text-align:right;"><%= bulkSubHistory.get('successPercnetage')%></td>
+							<td class="span2">
+								<a href="#modal-order" role="button" data-toggle="modal">
+								<button class="btn details span" data-id="<%= bulkHistory.get('requestId')%>" id="details<%= bulkSubHistory.get('requestId')%>" data-sub-id="<%= bulkSubHistory.get('requestId')%>">Details</button></a>
+							</td>
+							<td class="span2" style="text-align:center">
+								<button class="cancel-alarm cancel" data-id="<%= bulkHistory.get('requestId')%>" id="cancel<%= bulkSubHistory.get('requestId')%>" data-sub-id="<%= bulkSubHistory.get('requestId')%>"></button>
+							</td>
+						</tr>
+						
+						<% }); %></table></td></tr><tr><td colspan="11" style="display:none;"></td></tr> <%  }%>
+<% }); }%>

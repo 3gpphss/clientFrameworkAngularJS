@@ -1,0 +1,47 @@
+<div class="panel panel-shadow">
+	<fieldset class="n-fieldset">
+		<label class="col-sm-4 control-label">Identifier:</label>
+		<div class="col-sm-8">
+			<input type="text" class="form-control n-inputfield "
+				ng-model="common.identifier" name="Identifier"  />
+		</div>
+		<label class="col-sm-4 control-label">IMSI LIST:</label>
+		<div class="col-sm-8">
+			<table>
+				<tbody>
+					<tr>
+						<td><select id="myselection" size="6"
+							style="width: 255px; height: 100px" multiple="true"
+							ng-model="selectedMember"
+							ng-change="selectedItemChanged(selectedMember)"
+							ng-options="c.imsi for c in member"
+							class="ng-pristine ng-untouched ng-valid"></select></td>
+
+						<td>
+							<table>
+								<tbody>
+									<tr>
+										<td>
+											<button type="button" class="btn btn-standard"
+												ng-click="cleanFields()" value="New" name="btACDataAdd">New</button>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<button type="button" class="btn btn-standard"
+												ng-click="funcDeleteAucData($index)" value="Delete"
+												name="btACDataAdd">Delete</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</fieldset>
+</div>
+
+
+

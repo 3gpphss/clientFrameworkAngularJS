@@ -1,0 +1,146 @@
+<div>
+	<div class="offset15">
+		<div class="box-content">
+			<span>Last Refresh Time: </span> <span><%=lastRefreshTime%></span>
+		</div>
+	</div>
+	<div class="span24 padding-top-bottom-15">
+		<div class="box box-dashboard">
+			<div class="box-content no-padding">
+				<table
+					class="table ordmgmttable table-bordered table-striped table-hover table-header table-footer ordmgmttable-condensed table-shadow"
+					id="bulkOrders">
+					<thead>
+						<tr>
+							<th class="span3">User Name</th>
+							<th class="span3">Order File Name</th>
+							<th class="span3">Execution Start Time</th>
+							<th class="span3">Submission Time</th>
+							<th class="span2">State</th>
+							<th class="span3">Last State Update</th>
+							<th class="span2">Successful/Matched Count</th>
+							<th class="span2">Failed Count</th>
+							<th class="span2">Successful %</th>
+							<th class="span2">Details</th>
+							<th class="span2">Cancel</th>
+						</tr>
+					</thead>
+					</table>					
+					<div>
+					<div class="scrollbars vertical">
+						<table
+								class="table ordmgmttable table-bordered table-striped table-hover table-header table-footer ordmgmttable-condensed table-shadow ordermgmttable-sortable"
+								data-sort="true" id="bulkOrders">
+								<tbody>
+									<% if (bulkHistoryCollection!= undefined ) {
+									_.each(bulkHistoryCollection.models, function(bulkHistory){ %>
+									<tr>
+										<td class="span3"><% if (bulkHistory.has('subRequests'))
+											{ %><i class="icon-plus-sign main"
+											id="om<%= bulkHistory.get('requestId') %>"
+											style="cursor: pointer"></i> <%} %> <%=
+											bulkHistory.get('userName') %>
+										</td>
+										<td class="span3"><%= bulkHistory.get('extendedFileName')
+											%></td>
+										<td class="span3"><input type="text" class="span23"
+											id="timeScheduler<%= bulkHistory.get('requestId')%>"
+											data-id="<%= bulkHistory.get('requestId')%>"
+											value="<%= bulkHistory.get('scheduledExecutionTime') %>"
+											readonly></td>
+										<td class="span3"><%= bulkHistory.get('initialTimeStamp')
+											%></td>
+										<td class="status span2"
+											id="status<%= bulkHistory.get('requestId')%>"><strong><%=
+												bulkHistory.get('status') %></strong></td>
+										<td class="span3"><%=
+											bulkHistory.get('lastUpdatedTimestamp')%></td>
+										<td class="span2" style="text-align: right;"><%=bulkHistory.get('numberOfRequestsExecuted')%></td>
+										<td class="span2" style="text-align: right;"><%=bulkHistory.get('numberOfRequestsFailed')%></td>
+										<td class="span2" style="text-align: right;"><%=
+											bulkHistory.get('successPercnetage')%></td>
+										<td class="span2"><a href="#modal-order" role="button"
+											data-toggle="modal">
+												<button class="btn details span"
+													data-id="<%= bulkHistory.get('requestId')%>"
+													id="details<%= bulkHistory.get('requestId')%>"
+													disabled="disabled">Details</button>
+										</a></td>
+										<td class="span2" style="text-align: center">
+											<button class="cancel-alarm cancel"
+												data-id="<%= bulkHistory.get('requestId')%>"
+												id="cancel<%= bulkHistory.get('requestId')%>"
+												disabled="disabled"></button>
+										</td>
+									</tr>
+									<% if (bulkHistory.has('subRequests')) { %>
+
+									<tr id="om<%= bulkHistory.get('requestId') %>_child"
+										style="display: none;">
+										<td colspan="11" style="padding: 0px; border: 1px, 0px">
+											<table class="ordmgmttable" id="subBulkOrders">
+
+												<% _.each((bulkHistory.get('subRequests').models),
+												function(bulkSubHistory){ %>
+												<tr>
+													<td class="span3">&nbsp;</td>
+													<td class="span3"><%=
+														bulkSubHistory.get('extendedFileName') %></td>
+													<td class="span3"><input type="text" class="span23"
+														id="timeScheduler<%= bulkSubHistory.get('requestId')%>"
+														data-id="<%= bulkSubHistory.get('requestId')%>"
+														value="<%= bulkSubHistory.get('scheduledExecutionTime') %>"
+														readonly></td>
+													<td class="span3"><%=
+														bulkSubHistory.get('initialTimeStamp') %></td>
+													<td class="status span2"
+														id="status<%= bulkSubHistory.get('requestId')%>"><strong><%=
+															bulkSubHistory.get('status') %></strong></td>
+													<td class="span3"><%=
+														bulkSubHistory.get('lastUpdatedTimestamp')%></td>
+													<td class="span2" style="text-align: right;"><%=bulkSubHistory.get('numberOfRequestsExecuted')%></td>
+													<td class="span2" style="text-align: right;"><%=bulkSubHistory.get('numberOfRequestsFailed')%></td>
+													<td class="span2" style="text-align: right;"><%=
+														bulkSubHistory.get('successPercnetage')%></td>
+													<td class="span2"><a href="#modal-order" role="button"
+														data-toggle="modal">
+															<button class="btn details span"
+																data-id="<%= bulkHistory.get('requestId')%>"
+																id="details<%= bulkSubHistory.get('requestId')%>"
+																data-sub-id="<%= bulkSubHistory.get('requestId')%>"
+																disabled="disabled">Details</button>
+													</a></td>
+													<td class="span2" style="text-align: center">
+														<button class="cancel-alarm cancel"
+															data-id="<%= bulkHistory.get('requestId')%>"
+															id="cancel<%= bulkSubHistory.get('requestId')%>"
+															data-sub-id="<%= bulkSubHistory.get('requestId')%>"
+															disabled="disabled"></button>
+													</td>
+												</tr>
+
+												<% }); %>
+											</table>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="11" style="display: none;"></td>
+									</tr>
+									<% }%> <% }); }%>
+								</tbody>
+							</table>						
+						</div>
+					</div>
+					</div>
+					</div>
+			</div>
+		</div>
+		<div id="orderDetails"></div>
+		<script type="text/javascript">
+			$('.scrollbars').scrollbars({
+				alwaysVisible : true,
+				railVisible: false,
+				distance : '1px',
+				height: '450px'
+			});
+			</script>

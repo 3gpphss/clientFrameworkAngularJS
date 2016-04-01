@@ -1,0 +1,45 @@
+<div class="row-fluid">
+<div class="span24">
+		<div class="span6 guiBox" style="position:relative">
+			<div class="box-title">
+				<h5>Services</h5>
+			</div>
+			<div class="bulk-tree-scrollable" id="filterServicesDiv">
+				<ul class='nav nav-list' id="filterServicesTree">
+				</ul>
+			</div>
+		</div>
+	<div class="span18 guiBox">
+		<div class="row-fluid">
+			<div class="span24">
+				<div class="box-title">
+					<h5>Attributes</h5>
+				</div>
+			<div class="box box-dashboard">
+				<div class="box-content bulk-table-scrollable">
+					<table id="filterAttributesTable" class="table table-bordered table-striped table-hover table-header table-footer table-shadow">
+						<thead>	
+							<tr>
+								<th class="span5" style="padding-top: 5px;text-align: center">Display Name</th>
+								<th class="span3" style="padding-top: 5px;text-align: center">Join Operator</th>
+								<th class="span5" style="padding-top: 5px;text-align: center">Attribute Name</th>
+								<th class="span3" style="padding-top: 5px;text-align: center">Match Operator</th>
+								<th class="span6" style="padding-top: 5px;text-align: center">Value</th>
+								<th class="span2" style="padding-top: 5px;text-align: center">Action</th>
+							</tr>
+						</thead>
+						<tbody id="filterAttributesTableBody">
+						</tbody>
+					</table>
+				</div>
+				<div id="filterTextAreaDiv" style="padding-top: 5px">
+					<textarea id="filterTextArea" class="span24" placeholder="Enter Filter"></textarea>
+					<button class="btn" name="validateFilterBtn" value="validateFilter" id="validateFilterBtn">Validate Filter</button>
+					<button class="btn" name="clearFilterTextAreaBtn" value="clearFilterTextArea" id="clearFilterTextAreaBtn">Clear Filter Text</button>
+				</div>
+			</div>
+ 		    </div>
+  		</div>
+	 </div>
+   </div>
+</div>

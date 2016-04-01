@@ -1,0 +1,549 @@
+/* Clearfix */
+.clearfix:before,.clearfix:after {
+	content: " ";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+.clearfix {
+	margin-bottom: -24px;
+}
+
+.fixed-div {
+	position: fixed;
+	z-index: 1027;
+}
+
+
+nav li {
+	display: inline;
+	float: left;
+}
+
+.tab-bg {
+	border-color: rgb(216, 216, 216);
+	border-style: double;
+	border-width: 1px;
+	border-top-style: none;
+}
+
+.align-list1 {
+	padding-left: 110px;
+}
+
+.align-list2 {
+	padding-left: 10px;
+}
+
+.align-list3 {
+	padding-left: 15px;
+}
+
+.align-list4 {
+	padding-left: 28px;
+}
+
+.align-list5 {
+	padding-left: 78px;
+}
+
+.align-list6 {
+	padding-right: 10px;
+	padding-left: 10px;
+}
+.version {
+	color:white;
+	float:right;
+	font-weight: bold;
+}
+
+/*Styles for screen 767px and lower*/
+@media screen and (max-width: 767px) {
+	nav {
+		height: auto;
+	}
+	nav ul {
+		width: 100%;
+		display: block;
+		height: auto;
+	}
+	nav li {
+		width: 50%;
+		float: left;
+		position: relative;
+	}
+	nav li a {
+		border-bottom: 1px solid #576979;
+		border-right: 1px solid #576979;
+	}
+	nav a {
+		text-align: left;
+		width: 100%;
+		text-indent: 25px;
+	}
+}
+
+/*Styles for screen 480px and lower*/
+@media only screen and (max-width : 480px) {
+	nav {
+		border-bottom: 0;
+	}
+	nav ul {
+		display: none;
+		height: auto;
+	}
+}
+
+/*Smartphone*/
+@media only screen and (max-width : 276px) {
+	nav li {
+		display: block;
+		float: none;
+		width: 100%;
+	}
+}
+
+.nsr-scrollable {
+	max-height: 375px; /*New Class for scroll */
+	overflow-y: auto;
+}
+
+.order-scrollable {
+  max-height: 490px;  /*New Class for scroll */ 
+  overflow-y: auto;
+}
+
+/** Bulk provisioning changes Starts**/
+.aSelectedItem {
+	text-decoration: none !important;
+	color: #0b6daf !important;
+	cursor: pointer;
+}
+
+.aUnselectedItem {
+	text-decoration: none !important;
+	color: #000 !important;
+	cursor: pointer;
+}
+
+.bulk-table-scrollable {
+	height: 230px;
+	overflow-y: auto;
+}
+
+.bulk-tree-scrollable {
+	height: 355px;
+	overflow: auto;
+	width:100%;
+}
+
+.tree li {
+	margin: 0px 0;
+	list-style-type: none;
+	position: relative;
+	padding: 5px 5px 0px 2px;
+}
+
+.tree li::before {
+	content: '';
+	position: absolute;
+	top: -15px;
+	width: 1px;
+	height: 100%;
+	right: auto;
+	left: -19px;
+	border-left: 2px solid #ccc;
+	bottom: 50px;
+}
+
+.tree li::after {
+	content: '';
+	position: absolute;
+	top: 20px;
+	width: 21px;
+	height: 50px;
+	right: auto;
+	left: -19px;
+	border-top: 2px solid #ccc;
+}
+
+/*Remove connectors before root*/
+.tree>ul>li::before,.tree>ul>li::after {
+	border: 0;
+}
+
+/*Remove connectors after last child
+ .tree li:last-child::before {
+    height: 36px;
+} */
+.tree li:hover {
+	cursor: pointer;
+}
+
+/** Bulk provisioning changes Ends**/
+
+/** Calendar changes Starts **/
+.hide-text {
+	font: 0/0 a;
+	color: transparent;
+	text-shadow: none;
+	background-color: transparent;
+	border: 0
+}
+
+.input-block-level {
+	display: block;
+	width: 100%;
+	min-height: 30px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box
+}
+
+.bootstrap-datetimepicker-widget {
+	top: 0;
+	left: 0;
+	width: 250px;
+	padding: 4px;
+	margin-top: 1px;
+	z-index: 3000;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px
+}
+
+.bootstrap-datetimepicker-widget:before {
+	content: '';
+	display: inline-block;
+	border-left: 7px solid transparent;
+	border-right: 7px solid transparent;
+	border-bottom: 7px solid #ccc;
+	border-bottom-color: rgba(0, 0, 0, 0.2);
+	position: absolute;
+	top: -7px;
+	left: 6px
+}
+
+.bootstrap-datetimepicker-widget:after {
+	content: '';
+	display: inline-block;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-bottom: 6px solid #fff;
+	position: absolute;
+	top: -6px;
+	left: 7px
+}
+
+.bootstrap-datetimepicker-widget.pull-right:before {
+	left: auto;
+	right: 6px
+}
+
+.bootstrap-datetimepicker-widget.pull-right:after {
+	left: auto;
+	right: 7px
+}
+
+.bootstrap-datetimepicker-widget>ul {
+	list-style-type: none;
+	margin: 0
+}
+
+.bootstrap-datetimepicker-widget .timepicker-hour,.bootstrap-datetimepicker-widget .timepicker-minute,.bootstrap-datetimepicker-widget .timepicker-second
+	{
+	width: 100%;
+	font-weight: bold;
+	font-size: 1.2em
+}
+
+.bootstrap-datetimepicker-widget table[data-hour-format="12"] .separator
+	{
+	width: 4px;
+	padding: 0;
+	margin: 0
+}
+
+.bootstrap-datetimepicker-widget .datepicker>div {
+	display: none
+}
+
+.bootstrap-datetimepicker-widget .picker-switch {
+	text-align: center
+}
+
+.bootstrap-datetimepicker-widget table {
+	width: 100%;
+	margin: 0
+}
+
+.bootstrap-datetimepicker-widget td,.bootstrap-datetimepicker-widget th
+	{
+	text-align: center;
+	width: 20px;
+	height: 20px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px
+}
+
+.bootstrap-datetimepicker-widget td.day:hover,.bootstrap-datetimepicker-widget td.hour:hover,.bootstrap-datetimepicker-widget td.minute:hover,.bootstrap-datetimepicker-widget td.second:hover
+	{
+	background: #eee;
+	cursor: pointer
+}
+
+.bootstrap-datetimepicker-widget td.old,.bootstrap-datetimepicker-widget td.new
+	{
+	color: #999
+}
+
+.bootstrap-datetimepicker-widget td.active,.bootstrap-datetimepicker-widget td.active:hover
+	{
+	color: #fff;
+	background-color: #006dcc;
+	background-image: -moz-linear-gradient(top, #F47500, #F47500);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#F47500),
+		to(#F47500) );
+	background-image: -webkit-linear-gradient(top, #F47500, #F47500);
+	background-image: -o-linear-gradient(top, #F47500, #F47500);
+	background-image: linear-gradient(to bottom, #F47500, #F47500);
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc',
+		endColorstr='#ff0044cc', GradientType=0 );
+	border-color: #F47500 #F47500 #002a80;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	*background-color: #F47500;
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=  false );
+	color: #fff;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25)
+}
+
+.bootstrap-datetimepicker-widget td.active:hover,.bootstrap-datetimepicker-widget td.active:hover:hover,.bootstrap-datetimepicker-widget td.active:active,.bootstrap-datetimepicker-widget td.active:hover:active,.bootstrap-datetimepicker-widget td.active.active,.bootstrap-datetimepicker-widget td.active:hover.active,.bootstrap-datetimepicker-widget td.active.disabled,.bootstrap-datetimepicker-widget td.active:hover.disabled,.bootstrap-datetimepicker-widget td.active[disabled],.bootstrap-datetimepicker-widget td.active:hover[disabled]
+	{
+	color: #fff;
+	background-color: #F47500;
+	*background-color: #003bb3
+}
+
+.bootstrap-datetimepicker-widget td.active:active,.bootstrap-datetimepicker-widget td.active:hover:active,.bootstrap-datetimepicker-widget td.active.active,.bootstrap-datetimepicker-widget td.active:hover.active
+	{
+	background-color: #039 \9
+
+}
+
+.bootstrap-datetimepicker-widget td.disabled,.bootstrap-datetimepicker-widget td.disabled:hover
+	{
+	background: 0;
+	color: #999;
+	cursor: not-allowed
+}
+
+.bootstrap-datetimepicker-widget td span {
+	display: block;
+	width: 47px;
+	height: 54px;
+	line-height: 54px;
+	float: left;
+	margin: 2px;
+	cursor: pointer;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px
+}
+
+.bootstrap-datetimepicker-widget td span:hover {
+	background: #eee
+}
+
+.bootstrap-datetimepicker-widget td span.active {
+	color: #fff;
+	background-color: #006dcc;
+	background-image: -moz-linear-gradient(top, #F47500, #F47500);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#F47500),
+		to(#F47500) );
+	background-image: -webkit-linear-gradient(top, #F47500, #F47500);
+	background-image: -o-linear-gradient(top, #F47500, #F47500);
+	background-image: linear-gradient(to bottom, #F47500, #F47500);
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc',
+		endColorstr='#ff0044cc', GradientType=0 );
+	border-color: #F47500 #F47500 #002a80;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	*background-color: #F47500;
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=  false );
+	color: #fff;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25)
+}
+
+.bootstrap-datetimepicker-widget td span.active:hover,.bootstrap-datetimepicker-widget td span.active:active,.bootstrap-datetimepicker-widget td span.active.active,.bootstrap-datetimepicker-widget td span.active.disabled,.bootstrap-datetimepicker-widget td span.active[disabled]
+	{
+	color: #fff;
+	background-color: #F47500;
+	*background-color: #003bb3
+}
+
+.bootstrap-datetimepicker-widget td span.active:active,.bootstrap-datetimepicker-widget td span.active.active
+	{
+	background-color: #039 \9
+
+}
+
+.bootstrap-datetimepicker-widget td span.old {
+	color: #999
+}
+
+.bootstrap-datetimepicker-widget td span.disabled,.bootstrap-datetimepicker-widget td span.disabled:hover
+	{
+	background: 0;
+	color: #999;
+	cursor: not-allowed
+}
+
+.bootstrap-datetimepicker-widget th.switch {
+	width: 145px
+}
+
+.bootstrap-datetimepicker-widget th.next,.bootstrap-datetimepicker-widget th.prev
+	{
+	font-size: 21px
+}
+
+.bootstrap-datetimepicker-widget th.disabled,.bootstrap-datetimepicker-widget th.disabled:hover
+	{
+	background: 0;
+	color: #999;
+	cursor: not-allowed
+}
+
+.bootstrap-datetimepicker-widget thead tr:first-child th {
+	cursor: pointer
+}
+
+.bootstrap-datetimepicker-widget thead tr:first-child th:hover {
+	background: #eee
+}
+
+.input-append.date .add-on i,.input-prepend.date .add-on i {
+	display: block;
+	cursor: pointer;
+	width: 16px;
+	height: 16px
+}
+
+.bootstrap-datetimepicker-widget.left-oriented:before {
+	left: auto;
+	right: 6px
+}
+
+.bootstrap-datetimepicker-widget.left-oriented:after {
+	left: auto;
+	right: 7px
+}
+
+/** Calendar changes Ends **/
+
+/* tables */
+.ordmgmttable {
+table-layout:fixed;
+word-wrap:break-word;
+width: 100%;
+}
+
+.ordmgmttable.ordermgmttable-sortable > thead .sortable {
+  cursor: pointer;
+}
+.ordmgmttable.ordermgmttable-sortable > thead .sortable .when-up,
+.ordmgmttable.ordermgmttable-sortable > thead .sortable .when-down {
+  display: none;
+}
+.ordmgmttable.ordermgmttable-sortable > thead .sortable .when-none {
+  display: inline-block;
+}
+.ordmgmttable.ordermgmttable-sortable > thead .sortable.sortable-up .when-none,
+.ordmgmttable.ordermgmttable-sortable > thead .sortable.sortable-down .when-none {
+  display: none;
+}
+.ordmgmttable.ordermgmttable-sortable > thead .sortable.sortable-up .when-up {
+  display: inline-block;
+}
+.ordmgmttable.ordermgmttable-sortable > thead .sortable.sortable-down .when-down {
+  display: inline-block;
+}
+
+/* .ordmgmttable.tablesorter {
+	width: 100%;
+	background-color: #fff
+}
+.ordmgmttable.table-header th {
+  background-image: linear-gradient(bottom, rgb(234,234,234) 22%, rgb(255,255,255) 61%);
+  background-image: -o-linear-gradient(bottom, rgb(234,234,234) 22%, rgb(255,255,255) 61%);
+  background-image: -moz-linear-gradient(bottom, rgb(234,234,234) 22%, rgb(255,255,255) 61%);
+  background-image: -webkit-linear-gradient(bottom, rgb(234,234,234) 22%, rgb(255,255,255) 61%);
+  background-image: -ms-linear-gradient(bottom, rgb(234,234,234) 22%, rgb(255,255,255) 61%);
+  background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.22, rgb(234,234,234)),
+        color-stop(0.61, rgb(255,255,255))
+    );
+    text-align: left;
+    font-weight: normal;		
+}
+.ordmgmttable.tablesorter thead tr .header {
+	background-image: url(../images/bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+.ordmgmttable.tablesorter thead tr .headerSortUp {
+	background-image: url(../images/asc.gif);
+}
+.ordmgmttable.tablesorter thead tr .headerSortDown {
+	background-image: url(../images/desc.gif);
+}
+.ordmgmttable.tablesorter thead tr .headerSortDown, ordmgmttable.tablesorter thead tr .headerSortUp {
+background-color: #fff;
+}
+.ordmgmttable.tablesorter tbody td {
+	vertical-align: top;
+} */
+.ordmgmttable-condensed th, .ordmgmttable-condensed td {
+    padding: 0;
+     border-top: 1px solid #c3c5d0;
+}
+
+/* Horizontal navigation */
+.horizontal
+{
+	position: relative;
+	z-index: 3;
+	top: -1px;
+	height: 41px;
+	/* background: url("../images/nav.png") repeat-x scroll left -24px transparent; */
+}
+
+.horizontal ul
+{
+	width: auto;
+	margin: 0 auto;
+}
+
+.horizontal ul li
+{
+	display: block;
+	float: left;
+}
+
+.nav-back
+{
+	position: relative;
+	z-index: 3;
+	top: -1px;
+	height: 41px;
+	/* background: url("../images/nav.png") repeat-x scroll left -24px transparent; */
+}

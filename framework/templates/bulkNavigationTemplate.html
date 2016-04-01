@@ -1,0 +1,84 @@
+<div class="row-fluid">
+	<div class="span24 box">
+		<div class="span5 offset1  horizontal" style="margin-top:60px">
+			<ul class="clearfix">
+				<li>FCO</li> 
+				<li> <select style="width:165px;" name="bulkFcoType" id="bulkFcoType"></select></li>
+			</ul>
+		</div>
+		<div class="span18 guiBox" style="margin-top:10px">
+				<form style="padding:0px 0px 0px 15px">
+					<fieldset class="span9">
+						<div class="required">
+							<label> Result File Name </label>
+						</div>	
+						<input type="text" id="resultFileName" name="resultFileName" required placeholder="Result file name" title="" />
+						<label>Page Size (MB)</label>
+						<input type="text" name="responseFileSize" id="responseFileSize" maxlength="4"
+							onkeyup="this.value = range(this.value, 1, 2000)" placeholder="Response File Size" title="Allowed value range 1-2000 (MB)"/>
+						<label class="checkbox styled"> <input type="checkbox" id="bulkSchedulable" name="schedulable" />						<span>Schedulable</span> </label>
+					</fieldset>
+					<fieldset class="span5">
+						<label>Identifier File Name </label>
+						<input type="text" title="" placeholder="Identifier file name" id="identifierListName" name="identifierListName">
+						<label>Alias Type</label>
+						<select name="alias" id="alias" title="Enter an identitifer file name" disabled=true></select>
+						 <label class="checkbox styled">
+						<input type="checkbox" id="filterType" name="filterType" disabled=true /> <span>Negative List </span></label> 
+					</fieldset>
+					<fieldset class="span4">
+						<div style="padding: 29px 0px 0px 0px;overflow:auto;">
+							<a class="btn submit" id="uploadFile" data-toggle="modal" data-placement="right" rel="tooltip" role="button" href="#uploadPopup" data-original-title="Upload identifier file" title=""><i class="icon-upload"></i> </a>
+						</div>   						
+					</fieldset>
+				</form>
+		</div>
+<div class="tabbable row-fluid">
+<div style="margin-top:5px">
+	<ul style="list-style: none;" class="nav nav-tabs">
+		<li><a class="bulkNavigationTabs" href="#bulkFilterTabContent"
+			data-toggle="tab" id="bulkFilterTab">Filter</a></li>
+		<li class="active"><a class="bulkNavigationTabs"
+			href="#bulkSearchTabContent" data-toggle="tab" id="bulkSearchTab">Search</a></li>
+		<li><a class="bulkNavigationTabs"
+			href="#bulkModifyTabContent" data-toggle="tab" id="bulkModifyTab">Modify</a></li>
+		<li><a class="bulkNavigationTabs" href="#bulkDeleteTabContent"
+			data-toggle="tab" id="bulkDeleteTab">Delete</a></li>
+	</ul>
+</div>
+	<div class="tab-content row-fluid">
+		<div class="tab-pane active" id="bulkSearchTabContent">
+			<div id="bulkSearchDiv"></div>
+		</div>
+		<div class="tab-pane" id="bulkDeleteTabContent">
+			<div id="bulkDeleteDiv"></div>
+		</div>
+		<div class="tab-pane" id="bulkFilterTabContent">
+			<div id="bulkFilterDiv"></div>
+		</div>
+		<div class="tab-pane" id="bulkModifyTabContent">
+			<div id="bulkModifyDiv"></div>
+		</div>
+	</div>
+</div>	
+<div id="uploadPopup" class="modal hide fade" role="dialog" aria-hidden="true">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">x</button>
+						<h3>Choose files to upload</h3>
+					</div>
+					<form id="fileUpload" action="tenent/appdata/uploadIdentifierFile.htm" method="post" enctype="multipart/form-data">
+						<div class="modal-body">
+							<p> 
+								<input name="myFile" type="file" id="myFile"/>
+							</p>
+						</div>
+						<div class="modal-footer">
+							<input value="Upload" type="submit" class="btn" aria-hidden="true" id="Upload"/>
+							<button class="btn" data-dismiss="modal" aria-hidden="true" id="cancelUpload">Cancel</button>
+						</div>
+					</form>
+				</div>
+	</div>
+</div>
+

@@ -1,0 +1,56 @@
+<div id="modal-order" class="modal hide fade" role="dialog"
+	aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="n-btn close" data-dismiss="modal"
+			aria-hidden="true">x</button>
+		<div class="content"><h3>Order Details</h3></div>
+	</div>
+	<div class="modal-body">
+		<div class="box-content">
+			<table
+				class="table table-bordered table-striped table-hover table-header table-footer table-condensed table-shadow">
+				<tr>
+					<th>Order File Name</th>
+					<td><%=extendedFileName%></td>
+				</tr>
+				<tr>
+					<th>User Name</th>
+					<td><%=userName%></td>
+				</tr>
+				<tr>
+					<th>State</th>
+					<td><%=status%></td>
+				</tr>
+				<tr>
+					<th>Response File Name</th>
+					<td><%=extendedFileName%><%=extendedResponseFileName%></td>
+				</tr>
+				<tr>
+					<th>Submission Time</th>
+					<td><%=initialTimeStamp%></td>
+				</tr>
+				<tr>
+					<th>Last State Update</th>
+					<td><%=lastUpdatedTimestamp%></td>
+				</tr>
+				<tr>
+					<th>Total Number Of Requests</th>
+					<td><%=totalNumberOfRequests%></td>
+				</tr>
+				<tr>
+					<th>Successful Requests/Matched Count</th>
+					<td><%=numberOfRequestsExecuted%></td>
+				</tr>
+				<tr>
+					<th>Requests Failed Count</th>
+					<td><%=numberOfRequestsFailed%></td>
+				</tr>
+				<tr>
+					<th>Forward Address</th>
+					<td><%=fwdAddress%></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+</div>

@@ -1,0 +1,68 @@
+<div class="span24 guiBox">
+	<div class="box-content">
+		<div class="span10">
+			<form>
+				<fieldset>
+					<div class="box-rounded">
+						<div class="box-title">
+							<h5>Select Attributes</h5>
+						</div>
+						<div class="box-content">
+							<div class="span24 box" style="height: 60px">
+								<div class="scrollbars vertical">
+									<ul class=" nav nav-list" id="selectAttributeDiv">
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+		<div class="span4" align="center">
+			<br>
+			<div class="btn-group">
+				<button class="btn span24" id="assignBtn">
+					<i class="icon-forward"></i>
+				</button>
+				<button class="btn span24" id="unAssignBtn">
+					<i class="icon-backward"></i>
+				</button>
+			</div>
+		</div>
+		<div class="span10">
+			<form>
+				<fieldset>
+					<div class="box-rounded">
+						<div class="box-title">
+							<h5>Return Attributes</h5>
+						</div>
+						<div class="box-content">
+							<div class="span24 box" style="height: 60px">
+								<div class="scrollbars vertical">
+									<ul class=" nav nav-list" id="returnAttributeDiv">
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+
+
+
+
+	<div class="span24">
+		<label class="span4">Filter: </label>
+		<textarea id="bulkSearchFilter" class="span20" readonly="readonly"></textarea>
+	</div>
+	<button class="btn submit offset=5" name="submitBulkSearch"
+		value="Search" id="submitBulkSearch">Submit Bulk Search</button>
+</div>
+
+<script type="text/javascript">
+$('.scrollbars').scrollbars();
+</script>

@@ -1,0 +1,60 @@
+<div class="row-fluid span24 box">
+<div class="box-title">
+           <span style="font-weight: bolder; font-size:large; color: #F47500"><%= $("#fcoAccordin").text() %></span>
+            </div>
+	<div class="span6">		
+		<div id="fcoDiv">
+			<table
+				class="table table-bordered table-striped table-header table-footer table-condensed table-shadow offset1">
+				<thead>
+					<tr>
+						<th>List of identifiers</th>
+					</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>
+					<div class="scrollbars vertical" style="height: 116px">
+					<div  style="height: 200px">
+					<table class="table table-bordered table-striped table-hover ">
+										<tbody id="fcoList">
+				</tbody>
+					</table>
+					 </div>
+					</div>
+					</td>
+				</tr>
+				</tbody>
+
+			</table>
+		</div>
+		
+	</div>
+	<div class="span18">
+<table  width="97%">
+	<tr height="10%"><td>&nbsp; <p id="searchMode" hidden="true" class="offset22">
+	<i class="icon-2x icon-edit" name="Edit" id="editMode" title="Edit"></i>
+	<i class="icon-2x icon-remove-circle" id="deleteMode" data-toggle="modal" name="Delete" title="Delete"></i>
+<tr><td>
+<div id="childDiv" class="span24 offset1 nsr-scrollable"></div>
+</td></tr>
+<tr height="10%"><td><p id="updateMode" hidden="true" class="offset2">
+				<button class="btn" id="update"><i class="icon-thumbs-up-alt"></i>Update</button>
+				<button class="btn" id="cancelUpdate"><i class="icon-undo"></i>Cancel</button>
+		</p></td></tr>
+<tr height="10%"><td>
+<div id="deleteModeDiv" hidden="true" class="offset5">
+			<div>Are you sure you want to delete?</div>
+			<br/><div> <button class="btn" name="confirm" id="confirm">Confirm</button> 
+			&nbsp; &nbsp; &nbsp;  &nbsp; <button class="btn" name="cancel" id="cancel"><i class="icon-undo"></i>Cancel</button>
+			</div>
+		</div>
+</td></tr>
+</table>
+		
+	</div>
+</div>
+
+<script>
+    $('.scrollbars').scrollbars();
+</script>

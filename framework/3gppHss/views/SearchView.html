@@ -1,0 +1,46 @@
+<div style="visibility: visible;" class="grid span-28 centered vlead-2">
+
+	<fieldset class="n-fieldset">
+		<label class="col-sm-4 control-label">Identifier:</label>
+		<div class="col-sm-8">
+			<input type="text" class="text" 
+				ng-model="searchCondition.identifier" name="identifier">
+		</div>
+		<label class="col-sm-4 control-label">Private User Id:</label>
+		<div class="col-sm-8">
+			<input type="text" class="text" 
+				ng-model="searchCondition.privateUserId" name="privateUserId">
+		</div>
+		<label class="col-sm-4 control-label">Public User Id:</label>
+		<div class="col-sm-8">
+			<input type="text" class="text" 
+				ng-model="searchCondition.publicUserId" name="publicUserId"
+				size="37">
+		</div>
+		<label class="col-sm-4 control-label">MSISDN:</label>
+		<div class="col-sm-8">
+			<input type="text" class="text" 
+				ng-model="searchCondition.msisdn" name="msisdn" size="37">
+		</div>
+		<label class="col-sm-4 control-label">IMSI:</label>
+		<div class="col-sm-8">
+			<input type="text" class="text" 
+				ng-model="searchCondition.imsi" name="imsi" size="37">
+
+		</div>
+	</fieldset>
+
+
+	<div class="panel-section">
+		<fieldset class="n-fieldset">
+			<button type="button" class="btn btn-standard"
+				ng-click="funcSearchSubscriber('search', 'subscriber')" value="search"
+				name="btACDataAdd">Search</button>
+			<button type="button" class="btn btn-standard" ng-click="#"
+				value="Delete" name="btACDataAdd">Cancel</button>
+		</fieldset>
+	</div>
+	
+	{{searchReq}}
+
+</div>

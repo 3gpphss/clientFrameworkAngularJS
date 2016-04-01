@@ -1,0 +1,79 @@
+<div class="grid centered span-38">
+	<div class="span-32 trail-1">
+
+		<div class="panel-portal vpush-0 lifecycle block-form">
+			<div class="phase create clearfix first-child">
+				<div class="stripe"></div>
+				<h1 class="title">AUC</h1>
+				<div class="action">
+					<a href="">Add AUC Data</a>
+				</div>
+				<div class="action"><a href="">Modify AUC Data</a></div>
+				<div class="action">
+					<a href="">Delete AUC Data</a>
+				</div>
+			</div>
+
+			<div class="rule"></div>
+
+			<div class="phase go-live clearfix middle-child" id="nsrTab" >
+				<div class="stripe"></div>
+				<h1 class="title">HLR</h1>
+				<div class="action">
+					<a href="">Add HLR Data</a>
+				</div>
+				<div class="action">
+					<a href="">Modify HLR Data</a>
+				</div>
+
+				<div class="action">
+					<a href="">Delete HLR Data</a>
+				</div>
+			</div>
+			<div class="rule"></div>
+
+			<div class="phase create clearfix middle-child" id="nsrTab">
+				<div class="stripe"></div>
+				<h1 class="title">LTE</h1>
+				<div class="action">
+					<a href="">Add LTE Data</a>
+				</div>
+				<div class="action">
+					<a href="">Modify LTE Data</a>
+				</div>
+
+				<div class="action">
+					<a href="">Delete LTE Data</a>
+				</div>
+			</div>
+			<div class="rule"></div>
+			<div class="phase go-live clearfix last-child" id="hssDiv">
+				<div class="stripe"></div>
+				<h1 class="title">HSS</h1>
+				<div class="action">
+					<a href="">Add HSS Data</a>
+				</div>
+				<div class="action"><a href="">Modify HSS Data</a></div>
+				<div class="action">
+					<a href="" disable>Delete HSS Data</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div ng-switch="showMe">
+   	 <div ng-switch-when="false">Hello!</div>
+	</div>
+	
+	
+	<script type="text/javascript">
+
+       var e = document.getElementById("hssDiv");
+       var flg = 
+       if(e.style.display == 'block'){
+    	   e.style.display = 'none';
+       }else{
+    	   e.style.display = 'block';
+       }
+          
+</script>
+</div>

@@ -1,0 +1,7 @@
+.treeNode {
+	text-decoration: none; color: black; font: 10pt Arial; font-weight: bold;
+}
+
+.treeSubNode {
+	text-decoration: none; color: black; font: 9pt Arial; 
+}

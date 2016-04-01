@@ -1,0 +1,100 @@
+<!-- <div class="span24 guiBox">
+	<div class="span24">
+		<label class="span4">Filter: </label>
+		<textarea id="bulkModifyFilter" class="span20" readonly="readonly"></textarea>
+	</div>
+	<div id="modificationTextAreaDiv" class="span24"
+		style="padding-top: 5px">
+		<label class="span4">Modifications: </label>
+		<div class="span20">
+		<textarea id="modificationTextArea" class="span24"
+			placeholder="Enter Modification"></textarea>
+			<button class="btn" name="validateModificationBtn"
+				value="validateModification" id="validateModificationBtn">Validate
+				Modification</button>
+			<button class="btn" name="clearModificationTextAreaBtn"
+				value="clearModificationTextArea" id="clearModificationTextAreaBtn">Clear
+				Modification Text</button>
+		</div>
+	</div>
+	<button class="btn submit offset=5" name="submitBulkModify"
+		value="Modify" id="submitBulkModify">Submit Bulk Modify</button>
+</div> -->
+
+<!-- TODO: Replace the content above this line with the content below this line while starting implementation on user story: US_ FC4324_ E2_22  -->
+<div class="span24 guiBox">
+	<div class="span24">
+		<label class="span4">Filter: </label>
+		<textarea id="bulkModifyFilter" class="span20" readonly="readonly"></textarea>
+	</div>
+	<div class="span24">
+		<div class="box-title">
+				<h5>Modifications</h5>
+			</div>
+			<div class="box-content" id="bulkModificationsDiv">
+				<div class="row-fluid">
+					<div class="span24 guiBox">
+						<div class="span6 box">
+							<div class="box-title">
+								<h5>Services</h5>
+							</div>
+							<div class="box-content bulk-tree-scrollable" id="modificationServicesDiv">
+								<ul class='nav nav-list' id="modificationServicesTree">
+								</ul>
+							</div>
+							<button class="btn" name="modifyScoBtn" value="modifySco" id="modifyScoBtn">Choose Object to Modify</button>
+						</div>
+					<div class="span18 box">
+						<div class="row-fluid">
+							<div class="span24">
+								<div class="box-title">
+									<h5>Attributes</h5>
+								</div>
+								<div class="box box-dashboard">
+									<div class="box-content bulk-table-scrollable">
+										<div class="span24">
+												Operation : <select name="modifyOperation" id="modifyOperation"  style="width:142px">
+														<option value="set">set</option>
+														<option value="add">add</option>
+														<option value="addorset">addorset</option>
+														<option value="setoradd">setoradd</option>
+														<option value="remove">remove</option>
+													</select> 		
+													
+												Type:<span id="modifyScoType"></span>	
+										</div>
+										<table id="modificationAttributesTable" class="table table-bordered table-striped table-hover table-header table-footer table-shadow">
+											<thead>	
+												<tr>
+													<th class="span5" style="padding-top: 5px;text-align: center">Display Name</th>
+													<th class="span5" style="padding-top: 5px;text-align: center">Attribute Name</th>
+													<th class="span6" style="padding-top: 5px;text-align: center">Value</th>
+													<th class="span2" style="padding-top: 5px;text-align: center">Match Condition</th>
+													<th class="span2" style="padding-top: 5px;text-align: center">Modification ValueObject</th>
+												</tr>
+											</thead>
+											<tbody id="modificationAttributesTableBody">
+											</tbody>
+										</table>
+									</div>
+									<div id="modificationTextAreaDiv" class="span24"
+										style="padding-top: 5px">
+										<div class="span24">
+											<textarea id="modificationTextArea" class="span24" placeholder="Enter Modification"></textarea>
+											<button class="btn" name="validateModificationBtn" value="validateModification" id="validateModificationBtn">Validate
+												Modification</button>
+											<button class="btn" name="clearModificationTextAreaBtn" value="clearModificationTextArea" id="clearModificationTextAreaBtn">Clear Modification
+												Text</button>
+										</div>
+									</div>
+								</div>
+				 		    </div>
+				  		</div>
+					 </div>
+				   </div>
+				</div>
+			</div>
+	</div>
+	<button class="btn submit offset=5" name="submitBulkModify"
+		value="Modify" id="submitBulkModify">Submit Bulk Modify</button>
+</div>

@@ -1,0 +1,167 @@
+
+td {
+    height: 35px;
+}
+
+td.inactive:hover {
+   background: url("../images/tabbuttons.png") 100% -40px;
+   border-left:1px solid #36C9CC ! important;
+       //background-size: 100% 3000%;
+
+        //border-top: 2px outset rgba(0, 161, 204, 1) ! important;
+         //border-right: 2px outset  rgba(0, 161, 204, 1);
+        //border-left: 2px outset rgba(0, 161, 204, 1) ;
+}
+
+        td.active{
+                width: 5%;
+                height: 35px;
+                background: url("../images/tabbuttons.png")100% -80px;
+             //background-size: 100%;
+                background-repeat: no-repeat;
+                border-right:0px outset transparent ! important;
+                border-left:0px outset transparent ! important;
+
+                }
+td:first-child.active{
+                width: 5%;
+                height: 35px;
+                background: url("../images/tabbuttons.png")0px -80px !important;
+             //background-size: 100%;
+                background-repeat: no-repeat;
+                border-right:0px outset transparent ! important;
+                border-left:0px outset transparent ! important;
+
+                }
+td:first-child.inactive{
+                width: 5%;
+                height: 35px;
+                background: url("../images/tabbuttons.png")0px 0px ! important;
+             //background-size: 100%;
+                background-repeat: no-repeat;
+                border-right:1px inset #D0CBCB ! important;
+                border-left:0px outset transparent ! important;
+
+                }
+
+td:first-child.inactive:hover{
+                width: 5%;
+                height: 35px;
+                background: url("../images/tabbuttons.png")0px -40px !important;
+             //background-size: 100%;
+                background-repeat: no-repeat;
+                border-right:1px solid #36C9CC ! important;
+                }
+td:nth-last-child(-n+2).active{
+                width: 5%;
+                height: 35px;
+               background: url("../images/tabbuttons.png")100% -324px ;
+             //background-size: 100%;
+                background-repeat: no-repeat;
+                border-right:0px outset transparent ! important;
+		border-left:outset transparent ! important;
+                }
+td:nth-last-child(-n+2).inactive{
+                width: 5%;
+                height: 35px;
+                background: url("../images/tabbuttons.png")100% -244px ;
+             //background-size: 100%;
+                background-repeat: no-repeat;
+                border-right:0px outset transparent;
+               // border-left:1px inset #FFFFFF ! important;
+
+                }
+
+td:nth-last-child(-n+2).inactive:hover{
+                width: 5%;
+                height: 35px;
+                background: url("../images/tabbuttons.png")100% -284px ! important;
+
+             //background-size: 100%;
+                background-repeat: no-repeat;
+                border-right:0px outset transparent ! important; 
+		border-left:1px solid #36C9CC ! important;
+                }
+
+
+        td.inactive{
+                width: 5%;
+                height: 35px;
+                background: url("../images/tabbuttons.png") 100% 0px;
+                //background-repeat: no-repeat;
+//              //background-size: 100% ;
+                //padding-right: 757px;
+
+
+                }
+
+	.myFaces_panelTabbedPane_inactiveHeaderCell input {
+    		cursor: pointer;
+    		background-color: rgba(0, 0, 0, 0);
+	}
+ 
+	.myFaces_panelTabbedPane_inactiveHeaderCell, .myFaces_panelTabbedPane_disabledHeaderCell {
+    		border-top: 0px outset silver;
+    		border-right: 0px outset silver;
+    		border-bottom: 0px none;
+    		border-left: 0px outset silver;
+   		 text-align: center;
+   		 background-color: silver;
+	}
+
+	.myFaces_panelTabbedPane_activeHeaderCell {
+    		border-top: 0px outset silver;
+    		border-right: 0px outset silver;
+    		border-bottom: 0px none;
+   		border-left: 0px outset silver;
+    		text-align: center;
+	}	
+
+	.myFaces_panelTabbedPane_subHeaderCell_inactive {
+    		border-top: 0px outset silver;
+		border-left: 0px outset silver;
+		
+	}
+	
+	.myFaces_panelTabbedPane_pane {
+    		border-top: 0px;
+    		border-right: 0px;
+    		border-bottom: 0px;
+    		border-left: 0px;
+    		padding: 0px;
+			background-color: transparent !important;
+	}
+	
+	.myFaces_panelTabbedPane_subHeaderCell_last{
+		display:none !important;
+	}
+
+	.myFaces_panelTabbedPane_emptyHeaderCell{
+		display:none !important;
+	}
+	
+	.myFaces_pannelTabbedPane_subHeaderRow{
+		display:none !important;
+	}
+
+table.LteGeneralRATTable {
+    width: 350px;
+}
+table.LteEpsRestRATTypesTable {
+    width: 600px;
+}
+table.LteEpsMIPFeatureVectTable {
+    width: 300px;
+}
+.wide130px{
+    width: 130px;
+}
+.wide240px{
+    width: 240px;
+}
+.wide330px{
+    width: 330px;
+}
+.alignCenter {
+    margin: 0 auto;
+}
