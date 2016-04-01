@@ -12,14 +12,14 @@
 		<label class="col-sm-4 control-label">Mobile Country
 			Code(MCC):</label>
 		<div class="col-sm-8">
-			<select ng-model="local.acMcc" ng-options="a for a in MCC">
+			<select ng-model="local.acMcc" ng-options="a for a in config.mccTable">
 			</select>
 		</div>
 
 		<label class="col-sm-4 control-label">Mobile Network
 			Code(MNC):</label>
 		<div class="col-sm-8">
-			<select ng-model="local.acMnc" ng-options="b for b in MNC">
+			<select ng-model="local.acMnc" ng-options="b for b in config.mncTable">
 			</select>
 		</div>
 

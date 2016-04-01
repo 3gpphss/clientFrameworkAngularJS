@@ -41,6 +41,8 @@
 <script type="text/javascript" src="resources/framework/3gppHss/RESTProcessor.js"></script>
 <script type="text/javascript" src="resources/framework/3gppHss/PCType.js"></script>
 <script type="text/javascript" src="resources/framework/3gppHss/CommonController.js"></script>
+<script type="text/javascript" src="resources/framework/3gppHss/ConfigurationController.js"></script>
+<script type="text/javascript" src="resources/framework/3gppHss/ConfigurationFactory.js"></script>
 <script type="text/javascript" src="resources/framework/AUC/AUCController.js"></script>
 
 
@@ -133,7 +135,8 @@ var initialCBT ='&initial=true&reset=true&ctsub=true&tsub=false';
 			</div>
 		</div>
 	</div>
-	<div class="grid span-38 centered vpush-2">
+	<div class="grid span-38 centered vpush-2" ng-controller="configurationController" ng-init="config={};">
+	{{ ff }}
 		<div class="span-8 panel vertical-menu">
 			<div class="content">
 				<div class="topleft"></div>

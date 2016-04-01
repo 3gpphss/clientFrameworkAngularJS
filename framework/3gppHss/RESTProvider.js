@@ -25,6 +25,8 @@ threeGppHssApp.factory('restProvider', function() {
 			} else if (operation === "delete") {
 				// inprogress
 			}
+		} else if(type == "configData"){
+			restUrl = "appConfig/tenant/configData.htm";
 		}
 
 		return restUrl;

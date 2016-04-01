@@ -7,9 +7,6 @@ threeGppHssApp.controller('aucController', [
 			$scope.member = commonFactory.aucDataList;
 			$scope.response = commonFactory.response;
 
-			$scope.MCC = [ "262", "121", "111", "131", "141", "151" ];
-			$scope.MNC = [ "02", "11", "121", "141", "151" ];
-
 			$controller('commonController', {
 				$scope : $scope
 			});
