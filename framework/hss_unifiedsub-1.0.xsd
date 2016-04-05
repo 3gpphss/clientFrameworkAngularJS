@@ -1,0 +1,2068 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp2 (http://www.altova.com) by Raimund Havelka (NOKIA PSE) -->
+<!--*************************************************************-->
+<!--  Example of Unified Subscriber with HSS application         -->
+<!--                                                             -->
+<!--*************************************************************-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:subscriber="urn:siemens:names:prov:gw:HSS_UNIFIED_SUBSCRIBER:1:0" xmlns:spml="urn:siemens:names:prov:gw:SPML:2:0" targetNamespace="urn:siemens:names:prov:gw:HSS_UNIFIED_SUBSCRIBER:1:0" elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0">
+    <!--  schema imports -->
+    <xs:import namespace="urn:siemens:names:prov:gw:SPML:2:0" schemaLocation="prov-gw-spml-2.0.xsd"/>
+    <!--********************************************************************************************************-->
+    <!--                                     Common / Subscriber Objects                                        -->
+    <!--********************************************************************************************************-->
+    <!--***********************************************************-->
+    <!--  FIRST CLASS OBJECTS                                                        -->
+    <!--***********************************************************-->
+    <!-- The one and only first class object in SUBSCRIBER: Subscriber -->
+    <xs:complexType name="Subscriber">
+        <xs:annotation>
+            <xs:documentation>Definition of class subscriber </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="spml:FirstClassObject">
+                <xs:sequence>
+                    <xs:element name="auc" type="subscriber:AUC" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="profile" type="subscriber:Profile" minOccurs="0"/>
+                    <xs:element name="hlr" type="subscriber:HLR" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="hss" type="subscriber:HSS" minOccurs="0"/>
+                    <xs:element name="masteredBy" type="xsd:int" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="TemplateSubscriber">
+        <xs:annotation>
+            <xs:documentation>Definition of class TemplateSubscriber.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+			<!-- hlr element should not be unbounded for a TemplateSubscriber -->
+			<xs:extension base="spml:FirstClassObject">
+				<xs:sequence>
+					<xs:element name="auc" type="subscriber:AUC" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="profile" type="subscriber:Profile" minOccurs="0"/>
+					<xs:element name="hlr" type="subscriber:HLR" minOccurs="0"/>
+					<xs:element name="hss" type="subscriber:HSS" minOccurs="0"/>
+					<xs:element name="masteredBy" type="xsd:int" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- Note: Having multiple Contracts, IMSIs, AUCs, HSSs under one subscriber -->
+    <!-- imsiRef string has to be added in  AUCs, HSSs to bind them with single IMSI -->
+    <!-- xs:element name="imsiRef" type="xsd:string" minOccurs="0"/ -->
+    <!--************************************************************************-->
+    <!--  Common SECOND CLASS OBJECTS      -->
+    <!--************************************************************************-->
+    <xs:complexType name="AUC">
+        <xs:annotation>
+            <xs:documentation>Abstract base class for a service </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+                    <xs:element name="imsi" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="encKey" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="iccId" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="algoId" type="xsd:int" minOccurs="0"/>
+                    <xs:element name="cv" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="hmac" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="kdbId" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="acsub" type="xsd:int" minOccurs="0"/>
+                    <xs:element name="amf" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="sqn" type="xsd:string" minOccurs="0"/>
+		    <xs:element name="opcEncKey" type="xsd:string" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="AS">
+        <xs:annotation>
+            <xs:documentation>Abstract base class for an application service </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject"/>
+        </xs:complexContent>
+    </xs:complexType>
+    <!--************************************************************************-->
+    <!--           Profile SCO                                                  -->
+    <!--************************************************************************-->
+    <xsd:complexType name="Profile">
+        <xsd:annotation>
+            <xsd:documentation>SubscriberProfile</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="spml:SecondClassObject">
+                <xsd:sequence>
+                    <xsd:element name="givenName" type="subscriber:PrintableString128" minOccurs="0"/>
+                    <xsd:element name="surname" type="subscriber:PrintableString128" minOccurs="0"/>
+                    <xsd:element name="username" type="subscriber:PrintableString128" minOccurs="0"/>
+                    <xsd:element name="password" type="subscriber:String128" minOccurs="0"/>
+                    <xsd:element name="loginPassword" type="subscriber:String128" minOccurs="0"/>
+                    <xsd:element name="prepaid" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="roamingAllowed" type="xsd:boolean" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!--************************************************************************-->
+    <!--             Common Subscriber  aliases                                 -->
+    <!--************************************************************************--> 
+    <xs:simpleType name="SubscriberIdentifierAliasType">
+        <xs:restriction base="xsd:string">
+            <xs:enumeration value="identifier"/>
+            <xs:enumeration value="imsi"/>
+            <xs:enumeration value="username"/>
+			<xs:enumeration value="msisdn"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="SubscriberIdentifier">
+        <xs:simpleContent>
+            <xs:restriction base="spml:Identifier">
+                <xs:attribute name="alias" type="subscriber:SubscriberIdentifierAliasType" use="required"/>
+            </xs:restriction>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="SubscriberIdentifierFileNameType">
+        <xs:simpleContent>
+            <xs:restriction base="spml:IdentifierFileNameType">
+                <xs:attribute name="alias" type="subscriber:SubscriberIdentifierAliasType" use="required"/>
+                <xs:attribute name="filterType" type="spml:IdentifierFilterType" use="required"/>
+            </xs:restriction>
+        </xs:simpleContent>
+    </xs:complexType>       
+    <xs:complexType name="SubscriberAliasType">
+        <xs:complexContent>
+            <xs:restriction base="spml:AliasType">
+                <xs:attribute name="name" type="subscriber:SubscriberIdentifierAliasType" use="required"/>
+                <xs:attribute name="value" type="xsd:string" use="required"/>
+            </xs:restriction>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <!--***********************************************************************************************-->
+    <!--                                        HSS Application Service                                -->
+    <!--***********************************************************************************************-->  
+
+    <!--************************************************************************-->
+    <!--                                     HSS aliases                        -->
+    <!--************************************************************************--> 
+    <xs:simpleType name="HSSIdentifierAliasType">
+        <xs:restriction base="xsd:string">
+            <!-- Note: also using Subscriber's common aliases: identifier, imsi -->
+            <xs:enumeration value="msisdn"/>
+            <xs:enumeration value="impu"/>
+            <xs:enumeration value="impi"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="HSSIdentifier">
+        <xs:simpleContent>
+            <xs:restriction base="spml:Identifier">
+                <xs:attribute name="alias" type="subscriber:HSSIdentifierAliasType" use="required"/>
+            </xs:restriction>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="HSSIdentifierFileNameType">
+        <xs:simpleContent>
+            <xs:restriction base="spml:IdentifierFileNameType">
+                <xs:attribute name="alias" type="subscriber:HSSIdentifierAliasType" use="required"/>
+                <xs:attribute name="filterType" type="spml:IdentifierFilterType" use="required"/>
+            </xs:restriction>
+        </xs:simpleContent>
+    </xs:complexType>       
+    <xs:complexType name="HSSAliasType">
+        <xs:complexContent>
+            <xs:restriction base="spml:AliasType">
+                <xs:attribute name="name" type="subscriber:HSSIdentifierAliasType" use="required"/>
+                <xs:attribute name="value" type="xsd:string" use="required"/>
+            </xs:restriction>
+        </xs:complexContent>
+    </xs:complexType>
+    <!--************************************************************************-->
+    <!--  HSS Application Service SECOND CLASS OBJECTS                          -->
+    <!--************************************************************************-->
+    <xs:complexType name="HSS">
+        <xs:annotation>
+            <xs:documentation>HSS Application Service </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="subscriber:AS">
+                <xs:sequence>
+                    <xs:element name="subscriptionId" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="scscfDestinationRealm" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="profileType" type="subscriber:ProfileType" minOccurs="0"/>
+                    <xs:element name="adminBlocked" type="xsd:boolean" minOccurs="0"/>
+                    <xs:element name="defaultScscfRequired" type="xsd:boolean" minOccurs="0"/>
+                    <xs:element name="maximumPrivateIds" type="xsd:int" minOccurs="0"/>
+                    <xs:element name="maximumPublicIds" type="xsd:int" minOccurs="0"/>
+                    <xs:element name="subscriptionExpiryDate" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="scscfSipAddress" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="scscfHost" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="sharedIFCSupport" type="xsd:boolean" minOccurs="0"/>
+                    <xs:element name="chargingGroupId" type="xsd:string" minOccurs="0"/>
+                    <!-- Charging Collection Function -->
+                    <xs:element name="ccfPrimary" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="ccfSecondary" type="xsd:string" minOccurs="0"/>
+                    <!-- Event Charging Function -->
+                    <xs:element name="ecfPrimary" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="ecfSecondary" type="xsd:string" minOccurs="0"/>
+                    <!-- IMS10.0 RE123_105930 Changes -->
+                    <xs:element name="directRoutingSipAddress" type="xsd:string" minOccurs="0"/>
+                    <!-- IMS10.0 RE123_105930 End Changes -->
+		    <xs:element name="commonMsisdn" type="xsd:string" minOccurs="0"/>
+		     <xs:element name="suppressAliasForImsiMsisdn" type="xsd:boolean" minOccurs="0"/>
+
+                    <!-- SCO's  -->
+                    <xs:element name="privateUserId" type="subscriber:PrivateUserId" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="implicitRegisteredSet" type="subscriber:ImplicitRegisteredDataSet" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="publicUserId" type="subscriber:PublicUserId" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="serviceProfile" type="subscriber:ServiceProfile" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="repositoryData" type="subscriber:RepositoryData" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="notification" type="subscriber:Notification" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="pprTriggerInfo" type="subscriber:PPRTriggerInfo" minOccurs="0" maxOccurs="unbounded"/>
+                    <!-- IMS70-BEGIN -->
+                    <xs:element name="gussData" type="subscriber:GussData" minOccurs="0" maxOccurs="unbounded"/>
+                    <!-- IMS70-END -->
+	            <!-- IMS80-BEGIN -->
+                    <xs:element name="aliasGroup" type="subscriber:AliasGroup" minOccurs="0" maxOccurs="unbounded"/>
+		    <xs:element name="aliasRepositoryData" type="subscriber:AliasRepositoryData" minOccurs="0" maxOccurs="unbounded"/>
+                    <!-- IMS80-END -->
+					<xs:element name="refSharedUserProfile" type="xsd:string" minOccurs="0"/> 
+					<xs:element name="refCxRestrictionVPLMNId " type="xsd:string" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!--************************************************************************-->
+    <!--  SIMPLE TYPE SECTION: definition of simple types of attributes         -->
+    <!--************************************************************************-->
+    <xs:simpleType name="PreferredDomain">
+        <xs:annotation>
+            <xs:documentation>Preferred domain. Nokia proprietary. A Parameter that
+                identifies the preferred domain for the vcc (voice call continuity) user where the terminating
+                calls shall be routed to in case that the vcc-user is available in both domains.
+                Vcc user is a subscriber, which has has the feature CS/IMS roaming and handover.
+        </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xsd:string">
+            <xs:enumeration value="ims"/>
+            <xs:enumeration value="cs"/>
+            <xs:enumeration value="none"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DomainSelectionFlag">
+    	 <xs:annotation>
+    	     <xs:documentation>A parameter that identifies whether the UE is registered in VoLTE IMS or CS-IP IMS
+    	     If the domain flag value is 0, the UE is currently registered in a Domain controlled by NEC HLR.
+    	     If the domain flag value is 1, then the UE is (supposed to be) currently registered in VoLTE IMS (controlled by NOKIA HSS).
+    	     </xs:documentation>
+    	 </xs:annotation>
+    	 <xs:restriction base="xsd:string">
+    	     <xs:enumeration value="CS-IP"/>
+    	     <xs:enumeration value="VoLTE"/>             
+    	 </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ProfileType">
+        <xs:annotation>
+            <xs:documentation>Nokia proprietary. Defines type of subscriber profile. 
+                Profile can be used as e.g. template for other subscriber profiles.
+                Values:
+                NORMAL (0) : The profile was added through SA and defines a common IMS subscriber
+                TEMPLATE (2): The profile is added through SA and assigned as template
+                CUG (3): Closed User group. Special used and assigned from SVS data. SVS Data is XML encoded and stored as repository data which contains reference number to find CUG Profile.
+                PSI (4) : The profile was added through PGW and defines a PSI subscriber
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xsd:string">
+            <xs:enumeration value="normal"/>
+            <xs:enumeration value="template"/>
+            <xs:enumeration value="cug"/>
+            <!-- IMS70-BEGIN -->
+            <xs:enumeration value="guss"/>
+            <!-- IMS70-END -->
+            <!-- IMS10.0 RE123_105930 Changes -->
+            <xs:enumeration value="psi"/>
+             <!-- IMS10.0 RE123_105930 Changes -->
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="RegistrationStatus">
+        <xs:annotation>
+            <xs:documentation>The Registration Status, specified in 3GPP TS 29.228 [43], contains the status 
+                of registration of a multimedia user (e.g. registered, not registered, temporarily registered waiting for authentication).
+                Values:
+                NOT_REGISTERED: The user is not registered
+                REGISTERED: Indicates that the user is registered
+                DEFAULT: Default S-CSCF assigned (Registered for services for unregistered user)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xsd:string">
+            <xs:enumeration value="notRegistered"/>
+            <xs:enumeration value="registered"/>
+            <xs:enumeration value="default"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ProfilePartIndication">
+        <xs:annotation>
+            <xs:documentation>Enumerated type, with possible values "REGISTERED and UNREGISTERED, indicating if the iFC is a part of the registered or unregistered user profile. 
+                If ProfilePartIndicator is missing from the iFC, the iFC is  considered to be relevant to both the registered and unregistered parts  of the user profile, 
+                i.e. belongs to the common part of the user profile 
+                values:
+                UN_REGISTERED
+                REGISTERED
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xsd:string">
+            <xs:enumeration value="unRegistered"/>
+            <xs:enumeration value="registered"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Handling">
+        <xs:annotation>
+            <xs:documentation>Default handling The default handling procedure indicates whether to abandon the matching of lower priority triggers and to release the dialogue, 
+                or to continue the dialogue and trigger matching.
+                values:
+                - session continue.
+                - terminating.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xsd:string">
+            <xs:enumeration value="continue"/>
+            <xs:enumeration value="terminate"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="SessionReleasePolicy">
+        <xs:annotation>
+            <xs:documentation/>
+        </xs:annotation>
+        <xs:restriction base="xsd:string">
+            <xs:enumeration value="deregisterForcedSessionRelease"/>
+            <xs:enumeration value="deregisterNoForcedSessionRelease"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ForkingPolicy">
+        <xs:annotation>
+            <xs:documentation/>
+        </xs:annotation>
+        <xs:restriction base="xsd:string">
+            <xs:enumeration value="sequentialForking"/>
+            <xs:enumeration value="parallelForking"/>
+            <xs:enumeration value="mixedForking"/>
+            <xs:enumeration value="noForking"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AuthenticationScheme">
+        <xs:annotation>
+            <xs:documentation/>
+        </xs:annotation>
+        <xs:restriction base="xsd:string">
+            <xs:enumeration value="aka"/>
+            <xs:enumeration value="earlyIms"/>
+            <xs:enumeration value="gprs"/>
+            <xs:enumeration value="httpDigest"/>
+            <xs:enumeration value="nba"/>
+            <!-- IMS70LF-BEGIN -->
+            <xs:enumeration value="tlsDigestAkaV1"/>
+            <xs:enumeration value="tlsDigestAkaV2"/>
+            <!-- IMS70LF-END-->
+            <!-- IMS80 - BEGIN -->
+			<xs:enumeration value="sipDigest"/>
+			<xs:enumeration value="caveAka"/>
+			<xs:enumeration value="cache"/>
+			<xs:enumeration value="imrn"/>
+			<!-- IMS80 - END --> 
+        </xs:restriction>
+    </xs:simpleType>
+    <!--************************************************************************-->
+    <!--                                Simple Types                            -->
+    <!--************************************************************************-->
+    <xsd:simpleType name="PrintableString">
+        <xsd:annotation>
+            <xsd:documentation>Printable String  with '@' character</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[a-zA-Z\d '()+,-./:=?@_;]+"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="PrintableString128">
+        <xsd:annotation>
+            <xsd:documentation>Printable String of length 1 .. 128</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="subscriber:PrintableString">
+            <xsd:maxLength value="128"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="PrintableString254">
+        <xsd:annotation>
+            <xsd:documentation>Printable String of length 1 .. 254</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="subscriber:PrintableString">
+            <xsd:maxLength value="254"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="NumericString">
+        <xsd:annotation>
+            <xsd:documentation>Only digits allowed</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="\d+"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="NumericString3">
+        <xsd:annotation>
+            <xsd:documentation>Numeric String of length 1..3</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="subscriber:NumericString">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+    </xsd:simpleType>  
+    <xsd:simpleType name="NumericString5">
+        <xsd:annotation>
+            <xsd:documentation>Numeric String of length 1..5</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="subscriber:NumericString">
+            <xsd:maxLength value="5"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="NumericString15">
+        <xsd:annotation>
+            <xsd:documentation>NumericString of length 1..15</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="subscriber:NumericString">
+            <xsd:maxLength value="15"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="NumericString10_15">
+        <xsd:annotation>
+            <xsd:documentation>Numeric String of length 10..15</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="subscriber:NumericString">
+            <xsd:minLength value="10"/>
+            <xsd:maxLength value="15"/>
+        </xsd:restriction>
+    </xsd:simpleType>  
+    <xsd:simpleType name="String128">
+        <xsd:annotation>
+            <xsd:documentation>String of length 1 .. 128</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="128"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="PrintableString10">
+        <xsd:annotation>
+            <xsd:documentation>String of length 1 .. 10</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="subscriber:PrintableString">
+            <xsd:maxLength value="10"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="String10">
+        <xsd:annotation>
+            <xsd:documentation>String of length 1 .. 10</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="10"/>
+        </xsd:restriction>
+    </xsd:simpleType> 
+    <xsd:simpleType name="PrintableString64">
+        <xsd:annotation>
+            <xsd:documentation>String of length 1 .. 64</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="subscriber:PrintableString">
+            <xsd:maxLength value="64"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <!--************************************************************************-->
+    <!--  TYPE SECTION: Defining complex types/enumeration for flat attributes  -->
+    <!--************************************************************************-->
+    <xs:complexType name="PrivateUserId">
+        <xs:annotation>
+            <xs:documentation>Private User Identity Type - IMPI</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+                    <xs:element name="privateUserId" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="imsi" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="provisionedImsi" type="subscriber:ProvisionedImsi" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="msisdn" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="ipAddress" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="framedIPV6Prefix" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="framedInterfaceId" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="httpDigestKey" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="httpDigestKeyVersion" type="xsd:int" minOccurs="0"/>
+                    <xs:element name="preferredAuthenticationScheme" type="subscriber:AuthenticationScheme" minOccurs="0"/>
+                    <xs:element name="usedAuthenticationScheme" type="subscriber:AuthenticationScheme" minOccurs="0"/>
+                    <xs:element name="lineIdentifier" type="subscriber:LineIdentifier" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="sgsnId" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="ggsnId" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="actAsVLR" type="xsd:boolean" minOccurs="0"/>
+                    <xs:element name="chargeId" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="sessionId" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="preferredDomain" type="subscriber:PreferredDomain" minOccurs="0"/>
+                    <xs:element name="refGussDataId" type="subscriber:String10" minOccurs="0"/>
+                    <xs:element name="looseRoutingIndicationRequired" type="xsd:boolean" minOccurs="0"/>
+                    <xs:element name="digestRealm" type="xsd:string"  minOccurs="0"/>
+                    <xs:element name="digestHa1" type="subscriber:PrintableString32" minOccurs="0"/>
+                    <xs:element name="uimId" type="subscriber:HexadecimalString" minOccurs="0"/>
+                    <xs:element name="domainSelectionFlag" type="subscriber:DomainSelectionFlag" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="PublicUserId">
+        <xs:annotation>
+            <xs:documentation>Public User ID - IMPU</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+                    <xs:element name="publicUserId" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="originalPublicUserId" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="barringIndication" type="xsd:boolean" minOccurs="0"/>
+                    <xs:element name="defaultIndication" type="xsd:boolean" minOccurs="0"/>
+                    <xs:element name="serviceProfileName" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="irsId" type="xsd:string" minOccurs="0"/>
+                    <!-- IMS70-BEGIN -->
+                    <xs:element name="displayName" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="displayNamePrivacy" type="xsd:boolean" minOccurs="0"/>
+                    <!-- IMS70-END -->
+					 <!-- IMS80-BEGIN -->
+                    <xs:element name="aliasId" type="xsd:string" minOccurs="0"/>
+                    <!-- IMS80-END -->
+	            <xs:element name="isChildIMPU" type="xsd:boolean" minOccurs="0"/>
+	            <xs:element name="servicePriorityLevel" type="xsd:int" minOccurs="0"/>
+                <xs:element name="sarPublicUserId" type="xsd:string" minOccurs="0"/>
+				<xs:element name="publicIdType" type="subscriber:PublicIdentityType" minOccurs="0"/>
+				<!-- 16.5 - RE123_107241_enhancemet_of_CMS8200_in_Sh_interface START -->
+				<xs:element name="snrPublicUserId" type="xsd:string" minOccurs="0"/>
+				<!-- 16.5 - RE123_107241_enhancemet_of_CMS8200_in_Sh_interface END -->
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+	
+	<xs:simpleType name="PublicIdentityType">
+          <xs:annotation>
+              <xs:documentation>
+                  The PublicIdentityType indicates the type of public Identity
+                  0    distinctIMPU
+                  1    wildcardedIMPU
+              </xs:documentation>
+          </xs:annotation>
+          <xs:restriction base="xs:string">
+              <xs:enumeration value="distinctIMPU"/>
+              <xs:enumeration value="wildcardedIMPU"/>
+          </xs:restriction>
+      </xs:simpleType>
+	  
+    <xs:complexType name="ImplicitRegisteredDataSet">
+        <xs:annotation>
+            <xs:documentation>Implicit Registered Data Set - IRS</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+                    <xs:element name="irsId" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="registrationStatus" type="subscriber:RegistrationStatus" minOccurs="0"/>
+                    <xs:element name="authenticationPending" type="xsd:boolean" minOccurs="0"/>
+                    <xs:element name="provisionedPrivateId" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="privateIds" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="visitedNetworkListId" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="emergencyRegistration" type="xsd:boolean" minOccurs="0"/>
+					<!--Added changes for REG 16.5 RE123_106492 Registration state timestamp to count IMS active subscribers  -->	
+					<xs:element name="registrationTimeStamp" type="xsd:string" minOccurs="0"/>
+					<xs:element name="defaultRegTimeStamp" type="xsd:string" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+	
+	
+    <!-- IMS 8.0 BEGIN -->
+    <xs:complexType name="AliasGroup">
+        <xs:annotation>
+            <xs:documentation>
+                Name: Alias Group
+                Contents:
+                1. aliasGroupId = Identifer for the alias group
+                2. serviceProfileName =  Name of the service profile for this alias group.
+                3. irsId = IRS identifier for aliasGroup
+             
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+                    <xs:element name="aliasId" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="serviceProfileName" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="irsId" type="xsd:string" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+ 
+	
+	
+	
+    <xs:complexType name="Notification">
+        <xs:annotation>
+            <xs:documentation/>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+                    <xs:element name="asHostName" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="publicUserId" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="asDestinationRealm" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="asSipAddress" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="quiescenceStatus" type="xsd:boolean" minOccurs="0"/>
+                    <xs:element name="notifyScscfName" type="xsd:boolean" minOccurs="0"/>
+                    <xs:element name="notifyFilter" type="xsd:boolean" minOccurs="0"/>
+                    <xs:element name="notifyChargingInfo" type="xsd:boolean" minOccurs="0"/>
+                    <xs:element name="notifyPublicId" type="xsd:boolean" minOccurs="0"/>
+                    <xs:element name="notifyRegistration" type="xsd:boolean" minOccurs="0"/>
+                    <xs:element name="sessionId" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="serviceIndNames" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+					<!-- IMS 8.0 BEGIN -->
+                    <xs:element name="identitySet" type="subscriber:HSSIdentitSetType" minOccurs="0" maxOccurs="4"/>
+                    <xs:element name="shExpiryTime" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="messageWaitIndication" type="xsd:boolean" minOccurs="0"/>
+                    <!-- IMS 8.0 END -->
+                    <xs:element name="notifyServicePriorityLevel" type="xsd:boolean" minOccurs="0"/>
+
+					
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="RepositoryData">
+        <xs:annotation>
+            <xs:documentation/>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+                    <xs:element name="serviceIndId" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="publicUserId" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="version" type="xsd:int" minOccurs="0"/>
+                    <xs:element name="asData" type="xsd:string" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+	
+	
+	<!-- Alias repository Data -->
+	<xs:complexType name="AliasRepositoryData">
+        <xs:annotation>
+            <xs:documentation/>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+                    <xs:element name="serviceIndId" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="version" type="xsd:int" minOccurs="0"/>
+                    <xs:element name="asData" type="xsd:string" minOccurs="0"/>
+		    <xs:element name="aliasId" type="xsd:string" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+	
+	
+    <xs:complexType name="ServiceProfile">
+        <xs:annotation>
+            <xs:documentation>Service Profile</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+                    <xs:element name="profileName" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="mandatoryCapability" type="subscriber:MandatoryCapability" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="optionalCapability" type="subscriber:OptionalCapability" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="globalFilterId" type="subscriber:GlobalFilterId" minOccurs="0" maxOccurs="unbounded"/>				
+                    <xs:element name="subscribedMediaProfileID" type="subscriber:SubscribedMediaProfileID" minOccurs="0"/>
+                    <xs:element name="userFilterCriteria" type="subscriber:UserFilterCriteria" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="subscribedMediaProfileId" type="xsd:int" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="UserFilterCriteria">
+        <xs:annotation>
+            <xs:documentation/>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+                    <xs:element name="filterName" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="asSipAddress" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="priority" type="xsd:int" minOccurs="0"/>
+                    <xs:element name="triggerPoints" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="serviceInformation" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="handling" type="subscriber:Handling" minOccurs="0"/>
+                    <xs:element name="profilePartIndication" type="subscriber:ProfilePartIndication" minOccurs="0"/>
+                    <xs:element name="includeRegisterRequest" type="xsd:boolean" minOccurs="0"/>
+                    <xs:element name="includeRegisterResponse" type="xsd:boolean" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="MandatoryCapability">
+        <xs:annotation>
+            <xs:documentation/>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+                    <xs:element name="mandatoryCapability" type="xsd:long" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="OptionalCapability">
+        <xs:annotation>
+            <xs:documentation/>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+                    <xs:element name="optionalCapability" type="xsd:long" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="GlobalFilterId">
+        <xs:annotation>
+            <xs:documentation/>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+                    <xs:element name="globalFilterId" type="xsd:string" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="SubscribedMediaProfileID">
+        <xs:annotation>
+            <xs:documentation>The SubscribedMediaProfileID is an optional element of the service profile defined in 29.228. It will be reused to store one or more dedicated policies. 
+                A mechanism was defined so that this generic ID can be easily extended to be used to identify other types of policies. Each policy has its own bitmask. 
+                The exact policy could be calculated via an AND operation with the generic ID and the policy bit mask.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+                    <xs:element name="sessionReleasePolicy" type="subscriber:SessionReleasePolicy" minOccurs="0"/>
+                    <xs:element name="forkingPolicy" type="subscriber:ForkingPolicy" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ProvisionedImsi">
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+                    <xs:element name="provisionedImsi" type="xsd:string" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="LineIdentifier">
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+                    <xs:element name="lineIdentifier" type="xsd:string" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="PPRTriggerInfo">
+        <xs:annotation>
+            <xs:documentation/>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+                    <xs:element name="privateUserId" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="publicUserIds" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="RTRTriggerInfo">
+        <xs:annotation>
+            <xs:documentation>Definition of RTRTrigger info class</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="spml:FirstClassObject">
+                <xs:sequence>
+                    <xs:element name="publicUserIds" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="scscfAddress" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="scscfRealm" type="xsd:string" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- Definitions of application specific extensions of SPML  schema END-->
+    <!--************************************************************************-->
+    <!--  HLR Application Service SECOND CLASS OBJECTS                          -->
+    <!--  Having HLR, insert EPS_Group in the full HLR schema                   -->
+    <!--************************************************************************-->
+    <xs:complexType name="HLR">
+        <xs:annotation>
+            <xs:documentation>HLR Application Service </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="subscriber:AS">
+                <xs:sequence>
+                    <!-- imsi is reserved for future multi-valued version: -->
+                    <xs:element name="imsi" type="xsd:string" minOccurs="0"/>
+                    <!-- already existing shared EPS/HLR data -->
+                    <xs:element name="nwa" type="xsd:int" minOccurs="0"/>
+                    <xs:element name="odbgprs" type="xsd:int" minOccurs="0"/>
+                    <xs:element name="sr" type="xsd:int" minOccurs="0"/>
+                    <xs:element name="generalChargingCharacteristics" type="subscriber:GeneralChargingCharacteristics" minOccurs="0"/>
+                    <xs:element name="imeisv" type="xsd:string" minOccurs="0"/>
+                    <!--  End of: Do not copy in the HLR schema  -->
+                    <!-- New shared EPS/HLR data -->
+                    <xsd:element name="meId" type="subscriber:PrintableString64" minOccurs="0"/>
+                    <xsd:element name="accessRestr" type="subscriber:EpsAccessRestriction" minOccurs="0" maxOccurs="6"/>
+                    <xsd:element name="odbBaroam" type="subscriber:EPSOdbBarringRoam" minOccurs="0"/>
+                    <xsd:element name="pdpContext" type="subscriber:PDPContext" minOccurs="0" maxOccurs="50"/>
+                    <xsd:element name="sgsnMobData" type="subscriber:SgsnMobData" minOccurs="0"/>
+             	    <xsd:element name="sgsnIdentity" type="subscriber:PrintableString255" minOccurs="0"/>
+		    <xsd:element name="sgsnRealm" type="subscriber:PrintableString255" minOccurs="0"/>
+		    <xsd:element name="sgsnSupportedFeatures" type="subscriber:SgsnSupportedFeatures" minOccurs="0" maxOccurs="unbounded" />
+		    <xsd:element name="refHplmnListName" type="subscriber:PrintableString255" minOccurs="0"/>
+		    <xsd:element name="s6dSgsnNumber" type="subscriber:PrintableString255" minOccurs="0"/>
+                    <xsd:element name="s6dCombinedFlag" type="xsd:boolean" minOccurs="0"/>
+		    <xsd:element name="notification" type="subscriber:AppSrvNotificationData" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="icsIndicator" type="xsd:int" minOccurs="0"/>
+                    <xsd:element name="uEReachabilityReqInfo" type="subscriber:UEReachabilityReqInfo" minOccurs="0" />
+		    <xsd:element name="s6dLocUpdateTimestamp" type="xsd:dateTime" minOccurs="0"/>
+			
+                    <!-- EPS specific attributes -->
+                    <group ref="subscriber:EPS_Group"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="GeneralChargingCharacteristics">
+        <xs:annotation>
+            <xs:documentation>
+                  General Charging characteristics.
+              </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+                    <xs:element name="chargingCharacteristics" type="subscriber:ChargingCharacteristics" minOccurs="0" maxOccurs="4"/>
+                    <xs:element name="chargingCharacteristicsProfile" type="xsd:int" minOccurs="0"/>
+                    <xs:element name="chargingCharacteristicsBehavior" type="xsd:int" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:simpleType name="ChargingCharacteristics">
+        <xs:annotation>
+            <xs:documentation>
+                  This attribute specifies allowed charging characteristics. This attribute only accepts a single value
+                  entry.
+              </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xsd:string">
+            <xs:enumeration value="none"/>
+            <xs:enumeration value="normal"/>
+            <xs:enumeration value="prepaid"/>
+            <xs:enumeration value="flatRate"/>
+            <xs:enumeration value="hotBilling"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <!--  End of: Do not copy in the HLR schema  -->
+    
+    <!--************************************************************************-->
+    <!--                                     EPS aliases                        -->
+    <!--************************************************************************--> 
+    <xs:simpleType name="EPSIdentifierAliasType">
+        <xs:restriction base="xsd:string">
+            <!-- Note: also using Subscriber's common aliases: identifier, imsi -->
+            <xs:enumeration value="msisdn"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="EPSIdentifier">
+        <xs:simpleContent>
+            <xs:restriction base="spml:Identifier">
+                <xs:attribute name="alias" type="subscriber:EPSIdentifierAliasType" use="required"/>
+            </xs:restriction>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="EPSIdentifierFileNameType">
+        <xs:simpleContent>
+            <xs:restriction base="spml:IdentifierFileNameType">
+                <xs:attribute name="alias" type="subscriber:EPSIdentifierAliasType" use="required"/>
+                <xs:attribute name="filterType" type="spml:IdentifierFilterType" use="required"/>
+            </xs:restriction>
+        </xs:simpleContent>
+    </xs:complexType>       
+    <xs:complexType name="EPSAliasType">
+        <xs:complexContent>
+            <xs:restriction base="spml:AliasType">
+                <xs:attribute name="name" type="subscriber:EPSIdentifierAliasType" use="required"/>
+                <xs:attribute name="value" type="xsd:string" use="required"/>
+            </xs:restriction>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
+    <!--************************************************************************-->
+    <!-- EPS Extension of HLR Application Service                               -->
+    <!-- Contribution to HLR / Subscriber schema                                -->
+    <!--************************************************************************-->
+    <xs:group name="EPS_Group">
+        <xs:annotation>
+            <xs:documentation>Definition of EPS data </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="eps" type="subscriber:EPS" minOccurs="0"/>
+            <xs:element name="epsPdnContext" type="subscriber:EPSPdnContext" minOccurs="0" maxOccurs="100"/>
+            <xsd:element name="epsRoamAreaName" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="epsPsRoamAreaMmeName" type="xsd:string" minOccurs="0"/>
+	    <xsd:element name="epsRoamSubscriptionInfoName" type="xsd:string" minOccurs="0"/>
+	    <xsd:element name="epsCsg" type="subscriber:EPSCsg" minOccurs="0" maxOccurs="unbounded"/>  
+            <xsd:element name="epsTracingProfile" type="subscriber:EPSTracingProfile" minOccurs="0" />
+            <xsd:element name="epsPsRszi" type="subscriber:EPSPsRszi" minOccurs="0" maxOccurs="unbounded"/> 
+			<xsd:element name="epsASNotificationInfo" type="subscriber:EPSASNotificationInfo" minOccurs="0" maxOccurs="unbounded"/> 
+			<!-- RE123_106765_MTC_interface_enhancements_for_HSS -->  
+			<xs:element name="epsAdditionalHssServiceData" type="subscriber:EPSAdditionalHssServiceData" minOccurs="0"/>
+			<!-- End -->
+			<!-- RE123_106764_Cost reduction by optimized HSS for MTC devices -->
+			<xsd:element name="epsSharedUserProfile" type="subscriber:PrintableString255" minOccurs="0"/>
+			<xsd:element name="epsS6dULAHostId" type="subscriber:PrintableString255" minOccurs="0"/>
+			<!-- End -->
+		</xs:sequence>
+    </xs:group>
+    <!--************************************************************************-->
+    <!--           EPS SCOs                                                     -->
+    <!--************************************************************************-->
+    <xsd:complexType name="EPS">
+        <xsd:annotation>
+            <xsd:documentation>EPS Data</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="spml:SecondClassObject">
+                <xsd:sequence>
+                    <xsd:element name="defaultPdnContextId" type="xsd:unsignedInt" minOccurs="0"/>
+                    <xsd:element name="maxBandwidthUp" type="xsd:unsignedInt" minOccurs="0"/>
+                    <xsd:element name="maxBandwidthDown" type="xsd:unsignedInt" minOccurs="0"/>
+                    <xsd:element name="mmeIdentity" type="subscriber:PrintableString255" minOccurs="0"/>
+                    <xsd:element name="msPurgedEps" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="apnOIReplacement" type="subscriber:PrintableString64" minOccurs="0"/>
+                    <xsd:element name="sessionTransferNumber" type="xsd:unsignedLong" minOccurs="0"/>
+                    <xsd:element name="vplmnId" type="subscriber:PrintableString64" minOccurs="0"/>
+                    <xsd:element name="featuresSupportedByMME" type="subscriber:UnsignedInt8bit" minOccurs="0"/>
+                    <xsd:element name="ueRegistered" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="sessionTimeout" type="xsd:unsignedInt" minOccurs="0"/>
+                    <xsd:element name="aaaServerAddress" type="subscriber:PrintableString64" minOccurs="0"/>
+                    <xsd:element name="aaaServerRealm" type="subscriber:PrintableString64" minOccurs="0"/>
+                    <xsd:element name="currentRATType" type="subscriber:RATType" minOccurs="0"/>
+                    <xsd:element name="accessAPNEnabled" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="notAllowedRATTypes" type="subscriber:RATType" minOccurs="0" maxOccurs="12"/>
+                    <xsd:element name="mipFeatureVector" type="subscriber:EpsMipFeatureVector" minOccurs="0" maxOccurs="4"/>
+		    <xsd:element name="msisdn" type="subscriber:NumericString10_15" minOccurs="0"/>
+		    <!-- IMS 7.2 -->
+		    <xsd:element name="mmeSuppFeatures" type="subscriber:MmeSuppFeatures" minOccurs="0" maxOccurs="unbounded"/>
+		    <xsd:element name="odbPOAccessEps" type="subscriber:OdbPOAccessEps" minOccurs="0"/>
+		    <!-- IMS 7.2 -->
+		    <xsd:element name="rfspIndex" type="subscriber:EPSRfspType" minOccurs="0"/>
+		    <xsd:element name="mmeRealm" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="mmeUpdateSucceeded" type="xs:boolean" minOccurs="0"/>
+                     <xs:element name="plmnStatus" type="subscriber:EPSPlmnStatus" minOccurs="0"/>
+                     <xs:element name="mmeHostId" type="subscriber:PrintableString255" minOccurs="0"/>
+                    <xs:element name="imsVoiceOverPS" type="subscriber:EPSIMSVoiceOverPSSupport" minOccurs="0"/> 
+		    <xsd:element name="locUpdateTimestamp" type="xsd:dateTime" minOccurs="0"/>
+		    <xsd:element name="refLipaAllowedVplmnListName" type="subscriber:PrintableString255" minOccurs="0"/>
+                     <!-- RE123_106100 Enhanced Multimedia priority services (S6a) changes-->
+		    <xsd:element name="isMPSEnabled" type="xsd:boolean" minOccurs="0"/>
+		    <xsd:element name="refDeviceProfileName" type="subscriber:PrintableString64" minOccurs="0"/>
+		    <xsd:element name="vplmnIdS6a" type="subscriber:PrintableString64" minOccurs="0"/>
+                    <!-- RE123_106318 s6d support for verizon -->
+                    <xsd:element name="s6aSgsnNumber" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="s6aCombinedFlag" type="xsd:boolean" minOccurs="0"/>
+		    <xsd:element name="virtualApnName" type="subscriber:PrintableString32" minOccurs="0"/>
+                    <xsd:element name="epsAAARegistration" type="subscriber:EPSAAARegistration" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- RE123_106343 -->
+                    <xsd:element name="emergencyBarringEnabled" type="xsd:boolean" minOccurs="0"/>
+		    <!-- RE123_106342 NPLI Feature -->
+                    <!--type has been set as xsd:string limit is 7-->
+                    <xsd:element name="eUTRANCellGlobalId" type="xsd:string" minOccurs="0"/>
+                    <!--type has been set as xsd:string limit is 5-->
+                    <xsd:element name="trackingAreaId" type="xsd:string" minOccurs="0"/>
+                    <!--RE123_106279 HSS UE Fraud Prevention-->
+                    <xsd:element name="imeiRef" type="subscriber:NumericString" minOccurs="0"/>
+                    <xsd:element name="meidRef" type="subscriber:NumericString" minOccurs="0"/>
+                    <xsd:element name="privateUserIdRef" type="xsd:string" minOccurs="0"/>
+					<!-- RE123_106764_Cost reduction by optimized HSS for MTC devices -->
+					<xsd:element name="s6aULAHostId" type="subscriber:PrintableString255" minOccurs="0"/>
+					<!-- End -->
+                    <!-- RE123_106765_MTC_interface_enhancements_for_HSS - start - Step 2 -->
+                    <xsd:element name="sGsMmeIdentity" type="subscriber:PrintableString255" minOccurs="0"/>
+					<xsd:element name="pdnOnDemand" type="subscriber:EpsPdnOnDemandType" minOccurs="0"/>					
+                    <!-- RE123_106765_MTC_interface_enhancements_for_HSS - end Step 2 -->
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="EPSPdnContext">
+        <xsd:annotation>
+            <xsd:documentation>EPS PDN Context</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="spml:SecondClassObject">
+                <xsd:sequence>
+                    <xsd:element name="apn" type="subscriber:PrintableStringAPN255" minOccurs="0"/>
+                    <xsd:element name="contextId" type="xsd:unsignedInt" minOccurs="0"/>
+                    <xsd:element name="type" type="subscriber:EpsPdnType" minOccurs="0"/>
+                    <xsd:element name="ipv4Address" type="subscriber:IPv4" minOccurs="0"/>
+                    <xsd:element name="ipv6Address" type="subscriber:IPv6" minOccurs="0"/>
+                    <xsd:element name="pdnGw" type="subscriber:PrintableString255" minOccurs="0"/>
+                    <xsd:element name="pdnGwRealm" type="subscriber:PrintableString255" minOccurs="0"/>
+                    <xsd:element name="pdnGwIPv4" type="subscriber:IPv4" minOccurs="0"/>
+                    <xsd:element name="pdnGwIPv6" type="subscriber:IPv6" minOccurs="0"/>
+                    <xsd:element name="pdnGwDynamicAllocation" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="vplmnAddressAllowed" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="maxBandwidthUp" type="xsd:unsignedInt" minOccurs="0"/>
+                    <xsd:element name="maxBandwidthDown" type="xsd:unsignedInt" minOccurs="0"/>
+                    <xsd:element name="qos" type="subscriber:PrintableString255" minOccurs="0"/>
+                    <xsd:element name="pdnChargingCharacteristics" type="subscriber:PdnChargingCharacteristics" minOccurs="0"/>
+                    <xsd:element name="dynPdnInfo" type="subscriber:DynPdnInfo" minOccurs="0" maxOccurs="unbounded"/>
+                    <xsd:element name="pdnContextBlocking" type="subscriber:PdnContextBlocking" minOccurs="0"/>
+		    <xsd:element name="lipaPermission" type="subscriber:EPSLipaPermission" minOccurs="0"/>
+                    <xs:element name="apnOIReplacement" type="subscriber:PrintableString64" minOccurs="0"/>
+                    <xsd:element name="restorationPriority" type="xsd:unsignedInt" minOccurs="0"/>
+					<xsd:element name="virtualApnName" type="subscriber:PrintableString255" minOccurs="0"/>
+					<xsd:element name="refHssPdnContextName" type="xsd:string" minOccurs="0"/>
+		     <xsd:element name="aaaServerAddress" type="xsd:string" minOccurs="0"/>
+		     <xsd:element name="aaaServerRealm" type="xsd:string" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="EPSAAARegistration">
+        <xsd:annotation>
+            <xsd:documentation>EPS AAA Registration</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="spml:SecondClassObject">
+                <xsd:sequence>
+                    <xsd:element name="aaaServerAddress" type="subscriber:PrintableString64" minOccurs="0"/>
+                    <xsd:element name="aaaServerRealm" type="subscriber:PrintableString64" minOccurs="0"/>
+                    <xsd:element name="RATType" type="subscriber:RATType" minOccurs="0"/>
+                    <xsd:element name="regStatus" type="xsd:unsignedInt" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- IMS70-BEGIN -->
+    <xs:complexType name="GussData">
+        <xs:annotation>
+            <xs:documentation/>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+                    <xs:element name="gussDataId" type="subscriber:String10" minOccurs="0"/>
+                    <xs:element name="uiccSecurityType" type="subscriber:UiccSecurityType" minOccurs="0"/>
+                    <xs:element name="keyLifetime" type="xsd:unsignedInt" minOccurs="0"/>
+                    <xs:element name="gussTimeStamp" type="xsd:dateTime" minOccurs="0"/>
+                    <xs:element name="ussData" type="subscriber:UssData" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:simpleType name="UiccSecurityType">
+        <xs:annotation>
+            <xs:documentation/>
+        </xs:annotation>
+        <xs:restriction base="xsd:string">
+            <xs:enumeration value="gba"/>
+            <xs:enumeration value="gbau"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="UssData">
+        <xs:annotation>
+            <xs:documentation/>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+                    <xs:element name="ussDataId" type="subscriber:String10" minOccurs="0"/>
+                    <xs:element name="gsId" type="xsd:unsignedInt" minOccurs="0"/>
+                    <xs:element name="activeIndication" type="xsd:boolean" minOccurs="0"/>
+                    <xs:element name="ussType" type="xsd:unsignedInt" minOccurs="0"/>
+                    <xs:element name="refNafGroupId" type="subscriber:PrintableString64" minOccurs="0"/>
+                    <xs:element name="permissionListItem" type="subscriber:PermissionListItem" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="keySelectionId" type="subscriber:KeySelectionId" minOccurs="0"/>
+                    <xs:element name="upiListItem" type="subscriber:UpiListItem" minOccurs="0" maxOccurs="45"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="PermissionListItem">
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+                    <xs:element name="permissionFlag" type="xsd:unsignedInt" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:simpleType name="KeySelectionId">
+        <xs:annotation>
+            <xs:documentation/>
+        </xs:annotation>
+        <xs:restriction base="xsd:string">
+            <xs:enumeration value="ME-based"/>
+            <xs:enumeration value="UICC-based"/>
+            <xs:enumeration value="ME-UICC-based"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="UpiListItem">
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+                    <xs:element name="upi" type="subscriber:PrintableString128" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- IMS70-END -->
+
+    <!--************************************************************************-->
+          <!--          CanMsub Operation                                                                         -->
+    <!--************************************************************************-->
+    <xs:complexType name="canMsubOperation">
+                <xs:annotation>
+                        <xs:documentation> Defines the canMsub extended operation. The vlr.sgsn and mme types of
+                                cancelation is supported.</xs:documentation>
+                </xs:annotation>
+                <xs:complexContent>
+                        <xs:extension base="spml:AbstractOperation">
+                                <xs:sequence>
+                                     <xs:element name="imsi" type="subscriber:NumericString15" minOccurs="0"/>
+                                     <xs:element name="vlr" type="subscriber:CanMsubTarget" minOccurs="0"/>
+                                     <xs:element name="sgsn" type="subscriber:CanMsubTarget" minOccurs="0"/>
+                                     <xs:element name="mme" type="subscriber:CanMsubTarget" minOccurs="0"/>
+                                     <xs:element name="mmeRealm" type="subscriber:CanMsubTarget" minOccurs="0"/>
+                                     <xs:element name="sgsnIdentity" type="subscriber:CanMsubTarget" minOccurs="0"/>
+                                     <xs:element name="sgsnRealm" type="subscriber:CanMsubTarget" minOccurs="0"/>
+                                     <xs:element name="msubPurgedGprs" type="subscriber:CanMsubTargetBoolean" minOccurs="0"/>
+                                   <xs:element name="gprsDataSentIndication" type="subscriber:CanMsubTargetBoolean" minOccurs="0"/>
+                                   <xs:element name="force" type="xsd:boolean" minOccurs="0" default="false"/>
+								   <xs:element name="reattachRequiredS6A" type="xsd:boolean" minOccurs="0" />
+								   <xs:element name="reattachRequiredS6D" type="xsd:boolean" minOccurs="0" />
+                                </xs:sequence>
+                        </xs:extension>
+                </xs:complexContent>
+    </xs:complexType>
+	
+        <xs:complexType name="CanMsubTarget">
+                <xs:annotation>
+                        <xs:documentation> Defines optional address attribute for canMsub targets</xs:documentation>
+                </xs:annotation>
+                <attribute name="address" type="xsd:string"/>
+        </xs:complexType>
+
+        <xs:complexType name="CanMsubTargetBoolean">
+                <xs:annotation>
+                        <xs:documentation> Defines optional val attribute (of type boolean) for canMsub targets</xs:documentation>
+                </xs:annotation>
+                <attribute name="val" type="xsd:boolean"/>
+        </xs:complexType>
+
+     <xs:complexType name="CanMsubSubscriber">
+        <xs:annotation>
+            <xs:documentation> Defines the canMsub subscriber firstclass object                                                      </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="spml:FirstClassObject">
+                <xs:sequence>
+                     <!-- imsi value is stored in the identifier attribute of the FCO -->
+                    <xs:element name="vlr" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="sgsn" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="mme" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="mmeRealm" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="mmeHostId" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="sgsnIdentity" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="sgsnRealm" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="msubPurgedGprs" type="xsd:string" minOccurs="0"/>
+                    <xs:element name="gprsDataSentIndication" type="xsd:string" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+    <!--************************************************************************-->
+    <!--                             Types                                      -->
+    <!--************************************************************************-->
+    <xs:complexType name="PdnChargingCharacteristics">
+        <xs:annotation>
+            <xs:documentation>
+                    PDN Charging characteristics. 
+                    Mapping requires distinguising of these two types.
+                </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="subscriber:GeneralChargingCharacteristics"/>
+        </xs:complexContent>
+    </xs:complexType>
+    <xsd:simpleType name="String254">
+        <xsd:annotation>
+            <xsd:documentation>String of length 1 .. 254</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="254"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+	<xsd:simpleType name="EpsPdnOnDemandType">
+				<xsd:annotation>
+						<xsd:documentation>
+						0: On-Demand PDN is not allowed
+						1: On-Demand PDN type 1
+						2: On-Demand PDN type 2
+						3: On-Demand PDN type 3
+						4: On-Demand PDN type 4
+						</xsd:documentation>
+				</xsd:annotation>
+				<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="NOT_ALLOWED" />
+						<xsd:enumeration value="TYPE_ONE" />
+						<xsd:enumeration value="TYPE_TWO" />
+						<xsd:enumeration value="TYPE_THREE" />
+						<xsd:enumeration value="TYPE_FOUR" />
+				</xsd:restriction>
+	  </xsd:simpleType>    
+	<xsd:simpleType name="PrintableString255">
+        <xsd:annotation>
+            <xsd:documentation>Printable String of length 1 .. 255</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="subscriber:PrintableString">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="255"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+	
+	<xsd:simpleType name="PrintableString0_255">
+        <xsd:annotation>
+            <xsd:documentation>Printable String of length 0 .. 255</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="subscriber:PrintableString">
+            <xsd:maxLength value="255"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+	    
+    <xsd:simpleType name="IPv4">
+        <xsd:annotation>
+            <xsd:documentation>IPv4 address 
+                Example:  123.1.23.55
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="([1-9]?\d|1\d\d|2[0-4]\d|25[0-5])\.([1-9]?\d|1\d\d|2[0-4]\d|25[0-5])\.([1-9]?\d|1\d\d|2[0-4]\d|25[0-5])\.([1-9]?\d|1\d\d|2[0-4]\d|25[0-5])"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="IPv6">
+        <xsd:annotation>
+            <xsd:documentation>IPv6 address 
+                Examples:
+                4FDE:0000:0000:0002:0022:F376:FF3B:AB3F
+                10FB:0:0:0:C:ABC:1F0C:44DA
+                0:0:0:0:0:0:0:1
+                10FB::C:ABC:1F0C:44DA
+                FD01::1F
+                ::1
+                ::
+                ::ffff:192.168.89.9
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <!-- normal full format -->
+            <xsd:pattern value="([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}"/>
+            <!-- full format where the last 4 bytes of the IPv6 address are written in dot-decimal notation, in the style of IPv4 addresses. -->
+            <xsd:pattern value="(([0-9A-Fa-f]{1,4}:){6})(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}"/>
+
+            <!-- compressed format -->
+            <xsd:pattern value="::(([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){0,6})?)"/>
+            <xsd:pattern value="([0-9A-Fa-f]{1,4})::(([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){0,5})?)"/>
+            <xsd:pattern value="([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){1})::(([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){0,4})?)"/>
+            <xsd:pattern value="([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){2})::(([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){0,3})?)"/>
+            <xsd:pattern value="([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){3})::(([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){0,2})?)"/>
+            <xsd:pattern value="([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){4})::(([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){0,1})?)"/>
+            <xsd:pattern value="([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){5})::(([0-9A-Fa-f]{1,4})?)"/>
+            <xsd:pattern value="([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){6})::"/>
+            
+            <!-- compressed format where the last 4 bytes of the IPv6 address are written in dot-decimal notation, in the style of IPv4 addresses. -->
+            <xsd:pattern value="::(([0-9A-Fa-f]{1,4}:){0,5})(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}"/>
+            <xsd:pattern value="([0-9A-Fa-f]{1,4})::(([0-9A-Fa-f]{1,4}:){0,4})(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}"/>
+            <xsd:pattern value="([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}))::(([0-9A-Fa-f]{1,4}:){0,3})(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}"/>
+            <xsd:pattern value="([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){2})::(([0-9A-Fa-f]{1,4}:){0,2})(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}"/>
+            <xsd:pattern value="([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){3})::(([0-9A-Fa-f]{1,4}:){0,1})(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}"/>
+            <xsd:pattern value="([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){4})::(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="EpsMipFeatureVector">
+        <xsd:annotation>
+            <xsd:documentation>EPS Mip Feature Vector</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="mip6_integrated"/>
+            <xsd:enumeration value="pmip6_supported"/>
+            <xsd:enumeration value="ip4_hoa_supported"/>
+            <xsd:enumeration value="assign_local_ip"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="EpsPdnType">
+        <xsd:annotation>
+            <xsd:documentation>EPS Pdn type</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="ipv4"/>
+            <xsd:enumeration value="ipv6"/>
+            <xsd:enumeration value="both"/>
+            <xsd:enumeration value="ipv4oripv6"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="EpsAccessRestriction">
+        <xsd:annotation>
+            <xsd:documentation>EPS access restriction</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="UTRAN"/>
+            <xsd:enumeration value="GERAN"/>
+            <xsd:enumeration value="GAN"/>
+            <xsd:enumeration value="E-UTRAN"/>
+            <xsd:enumeration value="I-HSPA-Evolution"/>
+            <xsd:enumeration value="HO-To-Non3GPP"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="RATType">
+        <xsd:annotation>
+            <xsd:documentation>RAT type</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="WLAN"/>
+            <xsd:enumeration value="UTRAN"/>
+            <xsd:enumeration value="GERAN"/>
+            <xsd:enumeration value="GAN"/>
+            <xsd:enumeration value="HSPA_EVOLUTION"/>
+            <xsd:enumeration value="CDMA2000_1X"/>
+            <xsd:enumeration value="HRPD"/>
+            <xsd:enumeration value="UMB"/>
+            <xsd:enumeration value="VIRTUAL"/>
+            <xsd:enumeration value="EUTRAN"/>
+            <xsd:enumeration value="EHRPD"/>
+            <xsd:enumeration value="BBF-WLAN"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="UnsignedInt8bit">
+        <xsd:annotation>
+            <xsd:documentation>Unsigned 8 bit integer </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:unsignedInt">
+            <xsd:maxInclusive value="255"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+	
+	   <!-- Simple type  HSSIdentitSetType IMS 8.0 -->
+    <xs:simpleType name="HSSIdentitSetType">
+        <xs:restriction base="xsd:string">
+            <xs:enumeration value="ALL_IDENTITIES"/>
+            <xs:enumeration value="REGISTERED_IDENTITIES"/>
+            <xs:enumeration value="IMPLICIT_IDENTITIES"/>
+            <xs:enumeration value="ALIAS_IDENTITIES"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <!-- Simple type  HSSIdentitSetType IMS 8.0 -->
+
+
+ <xsd:simpleType name="PrintableString32">
+        <xsd:annotation>
+            <xsd:documentation>String of length 1 .. 32</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="32"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+	
+    <xsd:simpleType name="PrintableStringAPN255">
+        <xsd:annotation>
+            <xsd:documentation>Printable String APN of length 1 .. 255</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="subscriber:PrintableStringAPN">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="255"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+
+  <xsd:simpleType name="PrintableStringAPN">
+        <xsd:annotation>
+            <xsd:documentation>Printable String  with '@' and '*' character</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="\*|[a-zA-Z\d '()+,-./:=?@_]+"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+
+    <xsd:complexType name="DynPdnInfo">
+        <xsd:annotation>
+            <xsd:documentation>
+                This read only attribute stores the dynamic APN configuration (access point name, PDN GW host, realm and IPv4 or
+                IPv6 address). Dynamic APNs are only stored when the wildcard APN at S6a and SWx interface is
+                supported. In this case the attributes pdnGwHostName, pdnGwRealm, pdnGwIPv4, pdnGwIPv6 of the
+                wildcard entry are empty. In general, it is possible to register multiple dynamic APN configurations in
+                parallel for a wildcard APN. This attribute is written by the application FE (HSS-FE) after a request sent by
+                the MME/AAA. It is NOT provisioned, but the dynamic APN configuration can be read over the provisioning
+                interface (PGW GUI).
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="spml:SecondClassObject">
+                <xsd:sequence>
+                    <xsd:element name="pdnAccPointName" type="subscriber:PrintableString255" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="pdnGwHostName" type="subscriber:PrintableString255" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="pdnGwRealm" type="subscriber:PrintableString255" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="pdnGwIPV4" type="subscriber:PrintableString255" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="pdnGwIPV6" type="subscriber:PrintableString255" minOccurs="0" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+
+    <xsd:complexType name="PdnContextBlocking">
+        <xsd:annotation>
+            <xsd:documentation>
+                This attribute indicates whether the PDN context subscription is blocked or not for a
+                specific access type (eUTRAN/S6a or eHPPD/SWx). It consists of 8 bits. Currently only
+                the first two bits are used. Bit 1 denotes whether the APN is blocked via the S6a
+                interface, bit 2 denotes whether the APN is blocked via the SWx interface. The
+                remaining bits are for future use.
+                Possible values:
+                Bit 1 value 0: APN is not blocked over S6a
+                Bit 1 value 1: APN is blocked over S6a
+                Bit 2 value 0: APN is not blocked over SWx
+                Bit 2 value 1: APN is blocked over SWx
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="spml:SecondClassObject">
+                <xsd:sequence>
+                    <xsd:element name="flagAPNBlockedOverS6a" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="flagAPNBlockedOverSWx" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="flagReserved2" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="flagReserved3" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="flagReserved4" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="flagReserved5" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="flagReserved6" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="flagReserved7" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- IMS 7.2 -->
+
+
+    <xsd:simpleType name="OdbPOAccessEps">
+        <xsd:annotation>
+            <xsd:documentation>
+                Operator Determined Barring for packet oriented access (EPS) for usage over the S6a interface.
+                0 NONE NONE
+                1 ALLPOS Barr all PO service access
+                2 HPLMNAP Barr access to HPLMN-AP while roaming in VPLMN
+                3 VPLMNAP Barr access to AP that are within the roamed to VPLMN
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="NONE"/>
+            <xsd:enumeration value="ALLPOS"/>
+            <xsd:enumeration value="HPLMNAP"/>
+            <xsd:enumeration value="VPLMNAP"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+
+    <xsd:complexType name="MmeSuppFeatures">
+        <xsd:annotation>
+            <xsd:documentation>
+                This read only attribute contains the list of features supported by the MME. It is composed of the feature list ID and
+                the feature list. For the currently defined bits the feature list ID is 1. Curently 25
+                features are defined (thus at the moment one feature list is sufficient for the S6a interface).
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="spml:SecondClassObject">
+                <xsd:sequence>
+                    <xsd:element name="featuredListId" type="subscriber:BitString32" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="featuredList" type="subscriber:BitString" minOccurs="0" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+
+   <xsd:simpleType name="BitString32">
+        <xsd:annotation>
+            <xsd:documentation>Bit string with length 32 characters exactly</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="subscriber:BitString">
+            <xsd:minLength value="32"/>
+            <xsd:maxLength value="32"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+   <xsd:simpleType name="BitString">
+        <xsd:annotation>
+            <xsd:documentation>Only 0|1 is allowed</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="(0|1)+"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="HexadecimalString">
+        <xsd:annotation>
+            <xsd:documentation>Hexadecimal values are allowed.a-f,A-F and 0-9.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[A-Fa-f0-9]*"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+	<!--************************************************************************-->
+	<!--  Changes Related to FP: RE122_002211 Identity Swap (IMSI, MSISDN)      -->
+	<!--************************************************************************-->
+
+	<xs:simpleType name="SubscriberSwapAliasType">
+		<xs:restriction base="xsd:string">
+			<xs:enumeration value="imsi"/>
+			<xs:enumeration value="msisdn"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:complexType name="SubscriberSwapIdentifier">
+		<xs:simpleContent>
+			<xs:extension base="spml:ID">
+				<xs:attribute name="alias" type="subscriber:SubscriberSwapAliasType" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+		
+
+   <xsd:simpleType name="EPSOdbBarringRoam">
+        <xsd:annotation>
+            <xsd:documentation>
+                Operator Determined Barring for Restriction of roaming .
+                0 NONE    No barring of roaming
+                1 ROAMOH  roaming outside the home PLMN is restricted.
+                2 ROAMOHC roaming outside the home PLMN country is restricted.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="NONE"/>
+            <xsd:enumeration value="ROAMOH"/>
+            <xsd:enumeration value="ROAMOHC"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+	
+	<xsd:simpleType name="EPSRfspType">
+        <xsd:annotation>
+            <xsd:documentation>Integer and the range is  1 to 256 </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:int">
+            <xsd:minInclusive value="1"/>
+            <xsd:maxInclusive value="256"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+
+    <xsd:complexType name="EPSCsg">
+        <xsd:annotation>
+            <xsd:documentation>EPS CSG Data</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="spml:SecondClassObject">
+                <xsd:sequence>
+                    <xsd:element name="mccMnc" type="subscriber:PrintableString255" minOccurs="0"/>
+                    <xsd:element name="csgId" type="subscriber:EPSCsgId" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+
+ <xsd:complexType name="EPSPsRszi">
+        <xsd:annotation>
+            <xsd:documentation>EPS PS RSZI Data</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="spml:SecondClassObject">
+                <xsd:sequence>
+                            <xs:element name="mcc" type="subscriber:NumericString3" minOccurs="0"/>
+        			<xs:element name="mnc" type="subscriber:NumericString3" minOccurs="0"/>
+                            <xs:element name="zoneCode01" type="subscriber:NumericString5" minOccurs="0"/>
+        			<xs:element name="zoneCode02" type="subscriber:NumericString5" minOccurs="0"/>
+        			<xs:element name="zoneCode03" type="subscriber:NumericString5" minOccurs="0"/>
+        			<xs:element name="zoneCode04" type="subscriber:NumericString5" minOccurs="0"/>
+        			<xs:element name="zoneCode05" type="subscriber:NumericString5" minOccurs="0"/>
+        			<xs:element name="zoneCode06" type="subscriber:NumericString5" minOccurs="0"/>
+        			<xs:element name="zoneCode07" type="subscriber:NumericString5" minOccurs="0"/>
+        			<xs:element name="zoneCode08" type="subscriber:NumericString5" minOccurs="0"/>
+        			<xs:element name="zoneCode09" type="subscriber:NumericString5" minOccurs="0"/>
+        			<xs:element name="zoneCode10" type="subscriber:NumericString5" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+	
+    <xs:complexType name="EPSCsgId">
+        <xs:annotation>
+             <xsd:documentation>CSG Identifier is string. Note: It is modeled as SCO to allow  modification of  individual value(s)</xsd:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+                    <xs:element name="csgId" type="xsd:string" minOccurs="0"/>
+		    <xs:element name="apnName" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+	
+	<xsd:complexType name="EPSTracingProfile">
+        <xsd:annotation>
+            <xsd:documentation>EPS Tracing Profile</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="spml:SecondClassObject">
+                <xsd:sequence>
+                        <xsd:element name="reference" type="xsd:string" minOccurs="0" />
+                        <xsd:element name="depth" type="subscriber:EPSDepth" minOccurs="0" />
+                        <xsd:element name="neTypeList" type="subscriber:EPSNeType" minOccurs="0" />
+                        <xsd:element name="interfaceList" type="subscriber:EPSInterfaces" minOccurs="0" />
+                        <xsd:element name="eventList" type="subscriber:EPSEvents" minOccurs="0" />
+                        <xsd:element name="collectionEntityIp" type="subscriber:IPAddress" minOccurs="0" />
+                        <xsd:element name="activationState" type="subscriber:EPSActivationState" minOccurs="0" />
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+	
+	<xsd:simpleType name="EPSDepth">
+      <xsd:annotation>
+            <xsd:documentation>Integer in the range is 0 to 5 </xsd:documentation>
+      </xsd:annotation>
+      <xsd:restriction base="xsd:int">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="5"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+	
+	
+	<xsd:simpleType name="EPSNeType">
+      <xsd:annotation>
+            <xsd:documentation>Hexadecimal values are allowed.a-f,A-F and 0-9.</xsd:documentation>
+      </xsd:annotation>
+      <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[A-Fa-f0-9]*"/>
+			<xsd:minLength value="0"/>
+            <xsd:maxLength value="4"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+	
+	<xsd:simpleType name="EPSInterfaces">
+      <xsd:annotation>
+            <xsd:documentation>Hexadecimal values are allowed.a-f,A-F and 0-9.</xsd:documentation>
+      </xsd:annotation>
+      <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[A-Fa-f0-9]*"/>
+			<xsd:minLength value="0"/>
+            <xsd:maxLength value="28"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+	
+	<xsd:simpleType name="EPSEvents">
+      <xsd:annotation>
+            <xsd:documentation>Hexadecimal values are allowed.a-f,A-F and 0-9.</xsd:documentation>
+      </xsd:annotation>
+      <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[A-Fa-f0-9]*"/>
+			<xsd:minLength value="0"/>
+            <xsd:maxLength value="18"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+
+
+	<xsd:simpleType name="EPSActivationState">
+      <xsd:annotation>
+           <xsd:documentation>
+                Depth of the tracing required
+                0 active
+                1 inactive
+           </xsd:documentation>
+      </xsd:annotation>
+      <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="active"/>
+            <xsd:enumeration value="inactive"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+	
+	<xsd:simpleType name="IPAddress">
+        <xsd:annotation>
+            <xsd:documentation>Either ipv4 or ipv6 address is allowed</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <!-- IPV4 patter address-->
+                        <xsd:pattern value="([1-9]?\d|1\d\d|2[0-4]\d|25[0-5])\.([1-9]?\d|1\d\d|2[0-4]\d|25[0-5])\.([1-9]?\d|1\d\d|2[0-4]\d|25[0-5])\.([1-9]?\d|1\d\d|2[0-4]\d|25[0-5])"/>
+
+                        <!-- All possible IPV6 patterns -->
+                        <xsd:pattern value="([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}"/>
+            <!-- full format where the last 4 bytes of the IPv6 address are written in dot-decimal notation, in the style of IPv4 addresses. -->
+            <xsd:pattern value="(([0-9A-Fa-f]{1,4}:){6})(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}"/>
+
+            <!-- compressed format -->
+            <xsd:pattern value="::(([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){0,6})?)"/>
+            <xsd:pattern value="([0-9A-Fa-f]{1,4})::(([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){0,5})?)"/>
+            <xsd:pattern value="([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){1})::(([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){0,4})?)"/>
+            <xsd:pattern value="([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){2})::(([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){0,3})?)"/>
+            <xsd:pattern value="([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){3})::(([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){0,2})?)"/>
+            <xsd:pattern value="([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){4})::(([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){0,1})?)"/>
+            <xsd:pattern value="([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){5})::(([0-9A-Fa-f]{1,4})?)"/>
+            <xsd:pattern value="([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){6})::"/>
+
+            <!-- compressed format where the last 4 bytes of the IPv6 address are written in dot-decimal notation, in the style of IPv4 addresses. -->
+            <xsd:pattern value="::(([0-9A-Fa-f]{1,4}:){0,5})(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}"/>
+            <xsd:pattern value="([0-9A-Fa-f]{1,4})::(([0-9A-Fa-f]{1,4}:){0,4})(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}"/>
+            <xsd:pattern value="([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}))::(([0-9A-Fa-f]{1,4}:){0,3})(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}"/>
+            <xsd:pattern value="([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){2})::(([0-9A-Fa-f]{1,4}:){0,2})(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}"/>
+            <xsd:pattern value="([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){3})::(([0-9A-Fa-f]{1,4}:){0,1})(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}"/>
+            <xsd:pattern value="([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){4})::(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="EPSLipaPermission">
+        <xsd:annotation>
+	    <xsd:documentation>
+            Allowed values for Lipa Permission
+		0 LIPA-PROHIBITED
+       	        1 LIPA-ONLY 
+		2 LIPA-CONDITIONAL
+           </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="LIPA-PROHIBITED"/>
+            <xsd:enumeration value="LIPA-ONLY"/>
+            <xsd:enumeration value="LIPA-CONDITIONAL"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+     <!--**************************************************************************************-->
+      <!--Changes Related to Feature RE123_103651 (s6d Feature)                                 -->
+      <!--**************************************************************************************-->
+      <xsd:complexType name="Service">
+        <xsd:annotation>
+                  <xsd:documentation>Abstract base class for a service </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+                <xsd:extension base="spml:SecondClassObject"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="PDPContext">
+        <xsd:annotation>
+            <xsd:documentation> PDPContext </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="subscriber:Service">
+                <xsd:sequence>
+                    <xsd:element name="id" type="xsd:int" minOccurs="0"/>
+                    <xsd:element name="type" type="xsd:int" minOccurs="0"/>
+                    <xsd:element name="address" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="qosProfile" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="apn" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="apnArea" type="subscriber:PDPAccessPointNameAreaType" minOccurs="0"/>
+                    <xsd:element name="chargingCharacteristics" type="subscriber:ChargingCharacteristics" minOccurs="0" maxOccurs="4"/>
+                    <xsd:element name="chargingCharacteristicsProfile" type="xsd:int" minOccurs="0"/>
+                    <xsd:element name="chargingCharacteristicsBehavior" type="xsd:int" minOccurs="0"/>
+		    <xsd:element name="lipaPermission" type="subscriber:EPSLipaPermission" minOccurs="0"/>
+		    <xsd:element name="extType" type="xsd:int" minOccurs="0"/>
+		    <xsd:element name="extAddress" type="subscriber:IPAddress" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+   
+    <xsd:complexType name="SgsnMobData">
+        <xsd:annotation>
+            <xsd:documentation> SgsnMobData - Mobility data for SGSN (GPRS) </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="subscriber:Service">
+                <xsd:sequence>
+                    <xsd:element name="msPurged" type="xsd:boolean" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:simpleType name="PDPAccessPointNameAreaType">
+        <xsd:annotation>
+            <xsd:documentation>Enumeration of valid values for PDPAccessPointNameArea</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="HPLMN"/>
+            <xsd:enumeration value="ALLPLMN"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+	
+	<xsd:complexType name="SgsnSupportedFeatures">
+    <xsd:annotation>
+        <xsd:documentation>
+		Complex type containing the list of features supported by the SGSN.
+		It is composed of feature list ID and the feature. For the currently 
+		defined bits the feature list ID is 1. Currently 30 features are defined 
+		(thus at the moment one feature list is sufficient for the S6d interface).
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+        <xsd:extension base="spml:SecondClassObject">
+            <xsd:sequence>
+                <xsd:element name="featureListId" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+                <xsd:element name="feature" type="subscriber:FeatureList" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:extension>
+    </xsd:complexContent>
+    </xsd:complexType>
+
+
+	<xsd:simpleType name="FeatureList">
+        <xsd:annotation>
+            <xsd:documentation>
+			This is an enumeration of all the supported features 
+			of the origin hosts in S6a/S6d interface as defined by 3GPP.
+			</xsd:documentation>
+        </xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="ODB-all-APN"/>
+			<xsd:enumeration value="ODB-HPLMN-APN"/>
+			<xsd:enumeration value="ODB-VPLMN-APN"/>
+			<xsd:enumeration value="ODB-all-OG"/>
+			<xsd:enumeration value="ODB-all-InternationalOG"/>
+			<xsd:enumeration value="ODB-all-InternationalOGNotToHPLMN-Country"/>
+			<xsd:enumeration value="ODB-all-InterzonalOG"/>
+			<xsd:enumeration value="ODB-all-InterzonalOGNotToHPLMN-Country"/>
+			<xsd:enumeration value="ODB-all-InterzonalOGAndInternationalOGNotToHPLMN-Country"/>
+			<xsd:enumeration value="RegSub"/>
+			<xsd:enumeration value="Trace"/>
+			<xsd:enumeration value="LCS-all-PrivExcep"/>
+			<xsd:enumeration value="LCS-Universal"/>
+			<xsd:enumeration value="LCS-CallSessionRelated"/>
+			<xsd:enumeration value="LCS-CallSessionUnrelated"/>
+			<xsd:enumeration value="LCS-PLMNOperator"/>
+			<xsd:enumeration value="LCS-ServiceType"/>
+			<xsd:enumeration value="LCS-all-MOLR-SS"/>
+			<xsd:enumeration value="LCS-BasicSelfLocation"/>
+			<xsd:enumeration value="LCS-AutonomousSelfLocation"/>
+			<xsd:enumeration value="LCS-TransferToThirdParty"/>
+			<xsd:enumeration value="SM-MO-PP"/>
+			<xsd:enumeration value="Barring-OutgoingCalls"/>
+			<xsd:enumeration value="BAOC"/>
+			<xsd:enumeration value="BOIC"/>
+			<xsd:enumeration value="BOICExHC"/>
+			<xsd:enumeration value="UE-Reachability-Notification"/>
+			<xsd:enumeration value="T-ADS-Data-Retrieval"/>
+			<xsd:enumeration value="State/Location-Information-Retrieval"/>
+			<xsd:enumeration value="Partial Purge"/>
+			<xsd:enumeration value="Local Time Zone Retrieval"/>
+			<xsd:enumeration value="Additional MSISDN"/>
+			
+			<xsd:enumeration value="SMS in MME"/>
+			<xsd:enumeration value="SMS in SGSN"/>
+			<xsd:enumeration value="Dia-LCS-all-PrivExcep"/>
+			<xsd:enumeration value="Dia-LCS-Universal"/>
+			<xsd:enumeration value="Dia-LCS-CallSessionRelated"/>
+			<xsd:enumeration value="Dia-LCS-CallSessionUnrelated"/>
+			<xsd:enumeration value="Dia-LCS-PLMNOperator"/>
+			<xsd:enumeration value="Dia-LCS-ServiceType"/>
+			<xsd:enumeration value="Dia-LCS-all-MOLR-SS"/>
+			<xsd:enumeration value="Dia-LCS-BasicSelfLocation"/>
+			<xsd:enumeration value="Dia-LCS-AutonomousSelfLocation"/>
+			<xsd:enumeration value="Dia-LCS-TransferToThirdParty"/>
+			<xsd:enumeration value="Gdd-in-SGSN"/>
+			<xsd:enumeration value="Optimized-LCS-Proc-Support"/>
+			<xsd:enumeration value="SGSN CAMEL Capability"/>
+			<xsd:enumeration value="ProSe Capability"/>
+			<xsd:enumeration value="P-CSCF Restoration"/>
+			<xsd:enumeration value="Reset-IDs"/>
+			<xsd:enumeration value="Communication-pattern"/>
+		</xsd:restriction>
+    </xsd:simpleType>
+	
+	<xsd:complexType name="AppSrvNotificationData">
+        <xsd:annotation>
+            <xsd:documentation>Notification Data</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="spml:SecondClassObject">
+                <xsd:sequence>
+			   <xsd:element name="msisdn" type="subscriber:NumericString10_15" minOccurs="0" />
+                        <xsd:element name="asHostName" type="xsd:string" minOccurs="0" />
+                        <xsd:element name="asRealm" type="xsd:string" minOccurs="0" />
+                        <xsd:element name="asSubscribedInfo" type="subscriber:ASSubscribedInfo" minOccurs="0"/>
+                        <xsd:element name="expiryTime" type="xsd:string" minOccurs="0" />
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xs:complexType name="ASSubscribedInfo">
+        <xs:annotation>
+             <xsd:documentation>AS Subscribed Info</xsd:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+                    <xs:element name="subscribedInfo" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="UEReachabilityReqInfo">
+        <xs:annotation>
+             <xsd:documentation>AS Subscribed Info</xsd:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+                    <xs:element name="urppMME" type="xsd:boolean" minOccurs="0" />
+                    <xs:element name="urppSGSN" type="xsd:boolean" minOccurs="0" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+<xs:complexType name="EPSASNotificationInfo">
+        <xs:annotation>
+             <xsd:documentation>Application Server Notification Info's Instances</xsd:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+<xs:element name="asHostName" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+<xsd:element name="notificationData" type="subscriber:EPSNotificationData" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+	
+
+<xs:complexType name="EPSNotificationData">
+        <xs:annotation>
+             <xsd:documentation> Holds the Application Servers (AS) SUBSCRIPTION related Data </xsd:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+					<xsd:element name="notificationIdValue" type="xsd:string" minOccurs="0"/> 
+					<xsd:element name="dataReferenceType" type="subscriber:EPSDataReferenceType" minOccurs="0"/>
+					<xsd:element name="asRealm" type="xsd:string" minOccurs="0" />
+					<xsd:element name="serviceIndication" type="xsd:string" minOccurs="0" />
+					<xsd:element name="expiryTime" type="xsd:string" minOccurs="0" /> 
+					<xsd:element name="shUserIdentity" type="xsd:string" minOccurs="0"/>					
+					<xsd:element name="shUserName" type="xsd:string" minOccurs="0" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+<xs:simpleType name="EPSDataReferenceType">
+        <xs:annotation>
+            <xs:documentation>
+                  Contains Data reference value
+              </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xsd:string">
+            <xs:enumeration value="repositoryData"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    
+    <xs:simpleType name="EPSIMSVoiceOverPSSupport">
+                  <xs:restriction base="xs:string">
+                          <xs:enumeration value="imsVoiceOverPSNotSupported"/>
+                          <xs:enumeration value="imsVoiceOverPSSupported"/>
+                          <xs:enumeration value="imsVoiceOverPSSupportUnknown"/>
+                  </xs:restriction>
+      </xs:simpleType>
+  
+      <xs:simpleType name="EPSPlmnStatus">
+          <xs:annotation>
+              <xs:documentation>
+                  The plmnStatus indicates whether the LTE subscriber is roaming in HPLMN, HPLMNCountry or VPLMN.
+                  0    None
+                  1    HPLMN    Home PLMN
+                  2     HPLMNCountry    Home PLMN Country
+                  3     VPLMN    Visting PLMN
+                  4     ROAM-NOT-ALLOWED    Roaming not allowed
+              </xs:documentation>
+          </xs:annotation>
+          <xs:restriction base="xs:string">
+              <xs:enumeration value="NONE"/>
+              <xs:enumeration value="HPLMN"/>
+              <xs:enumeration value="HPLMNCountry"/>
+              <xs:enumeration value="VPLMN"/>
+              <xs:enumeration value="ROAM-NOT-ALLOWED"/>
+          </xs:restriction>
+      </xs:simpleType>
+	<!-- RE123_106765_MTC_interface_enhancements_for_HSS -->
+    <!-- RE123_106765_MTC_interface_enhancements_for_HSS - start - Step 2 -->
+    <xs:complexType name="RefScsGroupName">
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+                    <xsd:element name="refScsGroupName" type="subscriber:PrintableString128" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- RE123_106765_MTC_interface_enhancements_for_HSS - end - Step 2 -->
+    <xs:complexType name="EPSAdditionalHssServiceData">
+        <xs:annotation>
+            <xs:documentation>
+                  Additional service Data details.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="spml:SecondClassObject">
+                <xs:sequence>
+                    <!-- RE123_106765_MTC_interface_enhancements_for_HSS - start - Step 2 -->
+                    <xsd:element name="refScsGroupName" type="subscriber:RefScsGroupName" minOccurs="0" maxOccurs="unbounded"/>
+                    <!-- RE123_106765_MTC_interface_enhancements_for_HSS - end - Step 2 -->
+					<xsd:element name="deviceTriggerAllowed" type="xsd:boolean" minOccurs="0"/>
+					<xsd:element name="refPrivacyProfileReg" type="xsd:int" minOccurs="0"/>	
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+	<!-- End -->
+</xs:schema>

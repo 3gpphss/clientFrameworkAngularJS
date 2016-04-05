@@ -6,7 +6,7 @@ threeGppHssApp.controller('aucController', [
 
 			$scope.member = commonFactory.aucDataList;
 			$scope.response = commonFactory.response;
-
+	
 			$controller('commonController', {
 				$scope : $scope
 			});
@@ -49,7 +49,9 @@ threeGppHssApp.controller('aucController', [
 				var imsiObject = {};
 				angular.forEach($scope.aucData, function(value, key) {
 					console.log(key + " " + value);
+					if (value != ""){
 					imsiObject[key] = value;
+					}
 				}, imsiObject);
 
 				return imsiObject;
