@@ -116,7 +116,7 @@ var initialCBT ='&initial=true&reset=true&ctsub=true&tsub=false';
 				</div>
 			</div>
 
-			<div class="secondary multiple-tabs">
+			<div class="secondary multiple-tabs"">
 				<div class="fill-left"></div>
 				<div class="fill-right"></div>
 				<div class="content">
@@ -135,8 +135,8 @@ var initialCBT ='&initial=true&reset=true&ctsub=true&tsub=false';
 			</div>
 		</div>
 	</div>
-	<div class="grid span-38 centered vpush-2" ng-controller="configurationController" ng-init="config={};">
-	{{ ff }}
+	<div class="grid span-38 centered vpush-2"  ng-controller="configurationController" ng-init="config={};">
+	
 		<div class="span-8 panel vertical-menu">
 			<div class="content">
 				<div class="topleft"></div>
@@ -185,7 +185,7 @@ var initialCBT ='&initial=true&reset=true&ctsub=true&tsub=false';
 				<div></div>
 			</div>
 		</div>
-		<div class="span-28 panel" ng-controller="aucController"
+		<div class="span-28 panel"
 			ng-init="aucData={}; local={}; searchCondition={};">
 			{{common.errorMessage}}
 			<div ui-view="commonView"></div>

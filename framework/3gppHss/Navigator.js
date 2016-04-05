@@ -7,16 +7,21 @@ threeGppHssApp.config(function($stateProvider, $routeProvider) {
 		url : "/auc",
 		views : {
 			"applicationView" : {
-				templateUrl : "resources/framework/3gppHss/views/applications.html"
+				templateUrl : "resources/framework/3gppHss/views/applications.html",
+				controller : 'aucController'
 			},
 			"commonView" : {
-				templateUrl : "resources/framework/3gppHss/views/commanImsiSelectView.html"
+				templateUrl : "resources/framework/3gppHss/views/commanImsiSelectView.html",
+				controller : 'aucController'
 			},
 			"dataView" : {
-				templateUrl : "resources/framework/AUC/views/auc.html"
+				templateUrl : "resources/framework/AUC/views/auc.html",
+				controller : 'aucController'
 			},
 			"footerButtonsView" : {
-				templateUrl : "resources/framework/3gppHss/views/footerButtons.html"
+				templateUrl : "resources/framework/3gppHss/views/footerButtons.html",
+				controller : 'aucController'
+				
 			}
 		}
 	}).state('hlr', {
@@ -65,7 +70,8 @@ threeGppHssApp.config(function($stateProvider, $routeProvider) {
 		url : "/subscriberSearch",
 		views : {
 			"subscriberSearchView" : {
-				templateUrl : "resources/framework/3gppHss/views/SearchView.html"
+				templateUrl : "resources/framework/3gppHss/views/SearchView.html",
+				controller : 'commonController'
 			}
 		}
 	});
