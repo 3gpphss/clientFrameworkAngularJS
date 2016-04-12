@@ -84,9 +84,16 @@ threeGppHssApp
 													if (operation === "search") {
 														if (resolve['data']['spml.searchResponse']['result'] === 'success') {
 															getDataFromSearchResp(resolve);
+															addCommonData({
+																'errorMessage' : '',
+																'successMessage' : ''
+															});
 															$window.location.href = '#/auc';
 														} else if (resolve['data']['spml.searchResponse']['result'] === 'failure') {
 															addCommonData(resolve['data']['spml.searchResponse']);
+															addCommonData({
+																'successMessage' : ''
+															});
 														}
 													} else if (operation === "delete"
 															|| operation === "add"
@@ -94,17 +101,29 @@ threeGppHssApp
 														if (resolve['data']['spml.'
 																+ operation
 																+ 'Response']['result'] === 'success') {
+															addCommonData({
+																'successMessage' : 'successfully '
+																		+ operation,
+																'errorMessage' : ''
+															});
 															$window.location.href = '#/auc';
+
 														} else if (resolve['data']['spml.'
 																+ operation
 																+ 'Response']['result'] === 'failure') {
 															addCommonData(resolve['data']['spml.'
 																	+ operation
 																	+ 'Response']);
+															addCommonData({
+																'successMessage' : ''
+															});
 														}
 													}
-												}, function(reject) {
-													alert(reject)
+												},
+												function(reject) {
+													addCommonData({
+														'errorMessage' : 'REST SERVER IS NOT avaible AVAIBLE...'
+													});
 												});
 							}
 
@@ -175,6 +194,7 @@ threeGppHssApp
 							};
 
 							var addCommonData = function(data) {
+								console.log("called addCommonData");
 								angular.forEach(data, function(value, key) {
 									commonData[key] = value;
 								}, {});

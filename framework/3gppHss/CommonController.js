@@ -6,7 +6,6 @@ threeGppHssApp.controller('commonController', [
 			$scope.common = commonFactory.commonData;
 
 			$scope.funcCreateSubscriber = function(operation, type) {
-				commonFactory.commonData = {};
 				commonFactory.addCommonData($scope.common);
 				$scope.response = commonFactory
 						.getJsonResponse(type, operation);
@@ -16,9 +15,10 @@ threeGppHssApp.controller('commonController', [
 			$scope.funcSearchSubscriber = function(operation, type) {
 				
 				commonFactory.addSearchCondition($scope.searchCondition);
-				$scope.response = commonFactory
-						.getJsonResponse(type, operation);
+				commonFactory
+						.getJsonResponse(type, operation);	
 				$scope.common = commonFactory.commonData;
+				
 			};
 
 			$scope.funcModifySubscriber = function(operation, type) {

@@ -187,7 +187,8 @@ var initialCBT ='&initial=true&reset=true&ctsub=true&tsub=false';
 		</div>
 		<div class="span-28 panel"
 			ng-init="aucData={}; local={}; searchCondition={};">
-			{{common.errorMessage}}
+			
+			<div ui-view="msgView"></div>
 			<div ui-view="commonView"></div>
 			<div ui-view="applicationView"></div>
 			<div ui-view="dataView"></div>

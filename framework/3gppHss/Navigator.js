@@ -6,6 +6,10 @@ threeGppHssApp.config(function($stateProvider, $routeProvider) {
 	$stateProvider.state('auc', {
 		url : "/auc",
 		views : {
+			"msgView" : {
+				templateUrl : "resources/framework/3gppHss/views/msgView.html",
+				controller : 'aucController'
+			},
 			"applicationView" : {
 				templateUrl : "resources/framework/3gppHss/views/applications.html",
 				controller : 'aucController'
@@ -69,6 +73,10 @@ threeGppHssApp.config(function($stateProvider, $routeProvider) {
 	}).state('subscriberSearch', {
 		url : "/subscriberSearch",
 		views : {
+			"msgView" : {
+				templateUrl : "resources/framework/3gppHss/views/msgView.html",
+				controller : 'commonController'
+			},
 			"subscriberSearchView" : {
 				templateUrl : "resources/framework/3gppHss/views/SearchView.html",
 				controller : 'commonController'
